@@ -1,0 +1,33 @@
+{
+  "name": "nodejs-feedparser",
+  "description": "NodeJS feedparser",
+  "keywords": [
+    "feedparser"
+  ],
+  "version": "4.0.0",
+  "private": false,
+  "author": "M.Monis",
+  "repository": {
+    "type": "git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=10.11.0"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV=development nodemon server.js",
+    "debug": "cross-env NODE_ENV=development nodemon --debug server.js",
+    "test": "cross-env NODE_ENV=test babel-tape-runner test/test-*.js",
+    "pretest": "eslint .",
+    "prod": "pm2-runtime start ecosystem.config.js --env production"
+  },
+  "dependencies": {
+    "crossenv": "0.0.2-security",
+    "feedparser": "^2.2.10",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "nodemon": "^2.0.4"
+  }
+}
