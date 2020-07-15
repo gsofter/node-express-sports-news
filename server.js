@@ -1,40 +1,42 @@
-var FeedParser = require("feedparser");
-var fetch = require("node-fetch"); // for fetching the feed
+'use strict'
 
-var req = fetch(
-  "https://www.manchestereveningnews.co.uk/sport/football/rss.xml"
-);
-var feedparser = new FeedParser({
-  feedurl: "https://www.manchestereveningnews.co.uk/sport/football/rss.xml",
-});
+/*
+ * nodejs-feedparser
+ * Copyright(c) 2020 gurusoft13
+ * MIT Licensed
+ */
 
-req.then(
-  function (res) {
-    if (res.status !== 200) {
-      throw new Error("Bad status code");
-    } else {
-      // The response `body` -- res.body -- is a stream
-      res.body.pipe(feedparser);
-    }
-  },
-  function (err) {
-    // handle any request errors
-  }
-);
+/**
+ * Module dependencies
+ */
 
-feedparser.on("error", function (error) {
-  // always handle errors
-});
+require('dotenv').config()
 
-feedparser.on("readable", function () {
-  // This is where the action is!
-  var stream = this; // `this` is `feedparser`, which is a stream
-  var meta = this.meta; // **NOTE** the "meta" is always available in the context of the feedparser instance
-  var item;
+const express = require('express')
+const mongoose = require('mongoose')
+const config = require('./config')
+const app = express()
 
-  while ((item = stream.read())) {
-    console.log("ITEM START!!!");
-    console.log("title: ", item.title);
-    console.log("ITEM END!!!");
-  }
-});
+module.exports = app
+connect()
+
+function connect() {
+  mongoose.connection
+    .on('error', console.log)
+    .on('disconnected', connect)
+    .once('open', function () {
+      console.log('MONGO connected')
+      listen()
+    })
+  return mongoose.connect(config.db, {
+    keepAlive: 1,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+}
+
+function listen() {
+  app.listen(process.env.PORT || 3000, () =>
+    console.log('token server running on 5000'),
+  )
+}
