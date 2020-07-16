@@ -1,25 +1,15 @@
-'use strict'
-
-/*
- * nodejs-feedparser
- * Copyright(c) 2020 gurusoft13
- * MIT Licensed
- */
-
-/**
- * Module dependencies
- */
-
 require('dotenv').config()
-
 const express = require('express')
 const mongoose = require('mongoose')
-const config = require('./config')
+const config = require('../config')
 const app = express()
+const router = require('./router')
+const bootstrap = require('./bootstrap')
 
-module.exports = app
+app.use(router)
+bootstrap.compose()
+
 connect()
-
 function connect() {
   mongoose.connection
     .on('error', console.log)
@@ -37,6 +27,8 @@ function connect() {
 
 function listen() {
   app.listen(process.env.PORT || 3000, () =>
-    console.log('token server running on 5000'),
+    console.log('token server running on 3000'),
   )
 }
+
+module.exports = app
