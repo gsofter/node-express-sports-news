@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from './containers/Header'
 import Sidebar from './containers/Sidebar'
 import Searchbar from './containers/Searchbar'
+import Homepage from './pages/Home'
 export default function App() {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
   const [isOpenSearch, setIsOpenSearch] = useState(false)
@@ -16,6 +17,7 @@ export default function App() {
       <Header toggleMenu={toggleMenu} toggleSearch={toggleSearch} />
       <Sidebar toggleMenu={toggleMenu} isOpen={isOpenMenu} />
       <Searchbar toggleSearch={toggleSearch} isOpen={isOpenSearch} />
+      <Homepage />
     </>
   )
 }
