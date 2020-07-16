@@ -3,10 +3,8 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
   type: 'light',
-  palette: {
-    primary: {
-      main: '#f52d18',
-    },
+  typography: {
+    fontFamily: "'Space Mono', 'monospace', 'Roboto'",
   },
   shadows: ['none'],
   sidebarWidth: 260,

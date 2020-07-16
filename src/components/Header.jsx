@@ -2,13 +2,14 @@ import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: '#77c38b',
   },
 
   toolbar: {
@@ -39,12 +40,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Header({ openMenu }) {
+const HeaderAppBar = withStyles({
+  root: {
+    backgroundColor: '#77c38b',
+  },
+})(AppBar)
+
+export default function Header({ openMenu, openSearch }) {
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <HeaderAppBar position="static">
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
@@ -63,11 +70,12 @@ export default function Header({ openMenu }) {
             className={classes.searchButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={openSearch}
           >
             <SearchIcon />
           </IconButton>
         </Toolbar>
-      </AppBar>
+      </HeaderAppBar>
     </div>
   )
 }
