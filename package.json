@@ -14,15 +14,12 @@
   "engines": {
     "node": ">=10.11.0"
   },
-  "scripts": {
-    "start": "nodemon server/server.js",
-    "compose-feed": "node server/bootstrap/index.js",
-    "debug": "nodemon --debug server.js",
-    "test": "cross-env NODE_ENV=test babel-tape-runner test/test-*.js",
-    "pretest": "eslint .",
-    "prod": "pm2-runtime start ecosystem.config.js --env production"
-  },
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "crossenv": "0.0.2-security",
     "csv-parser": "^2.3.3",
     "dotenv": "^8.2.0",
@@ -31,7 +28,32 @@
     "fs": "0.0.1-security",
     "moment": "^2.27.0",
     "mongoose": "^5.9.24",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1"
+  },
+  "scripts": {
+    "start-server": "nodemon server/server.js",
+    "start-client": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
     "cross-env": "^7.0.2",

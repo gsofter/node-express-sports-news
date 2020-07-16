@@ -26,8 +26,8 @@ function connect() {
 }
 
 function listen() {
-  app.listen(process.env.PORT || 3000, () =>
-    console.log('token server running on 3000'),
+  app.listen(process.env.PORT || 5000, () =>
+    console.log('token server running on 5000'),
   )
 }
 
