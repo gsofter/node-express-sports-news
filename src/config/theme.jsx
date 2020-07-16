@@ -9,6 +9,8 @@ const theme = createMuiTheme({
     },
   },
   shadows: ['none'],
+  sidebarWidth: 260,
+  sidebarMobileHeight: 90,
 })
 
 const FantalkTheme = ({ children }) => {

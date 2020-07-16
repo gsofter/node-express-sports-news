@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Header() {
+export default function Header({ openMenu }) {
   const classes = useStyles()
 
   return (
@@ -51,6 +51,7 @@ export default function Header() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={openMenu}
           >
             <MenuIcon />
           </IconButton>
