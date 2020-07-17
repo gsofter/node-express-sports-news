@@ -50,7 +50,7 @@ const compose = () => {
     .on('data', async (row) => {
       const filter = { feed_name: row['Feed name'] }
       const update = {
-        lang_name: row['lang'],
+        language: row['lang'],
         feed_url: row['Feed URL'],
       }
       const newFeed = await LangFeed.findOneAndUpdate(filter, update, {

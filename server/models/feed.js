@@ -11,7 +11,7 @@ const TeamFeedSchema = new Schema({
 })
 
 const LangFeedSchema = new Schema({
-  lang_name: String,
+  language: String,
   feed_name: String,
   feed_url: String,
 })

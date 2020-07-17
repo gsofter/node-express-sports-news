@@ -63,13 +63,19 @@ const MenuSubItem = withStyles({
 const CountryItem = ({ country, handleClickCountry }) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.stopPropagation()
     setOpen(!open)
   }
 
   return (
     <>
-      <MenuItem button onClick={() => handleClickCountry(country.country)}>
+      <MenuItem
+        button
+        onClick={(e) => {
+          handleClickCountry(country.country)
+        }}
+      >
         <ListItemText>{country.country}</ListItemText>
         {open ? (
           <ExpandLess onClick={handleClick} />

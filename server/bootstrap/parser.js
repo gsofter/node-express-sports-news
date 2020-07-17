@@ -1,7 +1,6 @@
-const config = require('./config')
 const mongoose = require('mongoose')
-const Team = require('./server/models/team')
-const Article = require('./server/models/article')
+require('../models/article')
+const Article = mongoose.model('article')
 const moment = require('moment')
 /**
  * Tip
@@ -13,7 +12,7 @@ var fetch = require('node-fetch')
 var FeedParser = require('feedparser')
 var iconv = require('iconv-lite')
 
-export function parse(feedEndpoint, language = 'en', country = '', team = '') {
+function parse(feedEndpoint, language = 'en', country = '', team = '') {
   // Get a response stream
   fetch(feedEndpoint, {
     'user-agent':
@@ -34,12 +33,16 @@ export function parse(feedEndpoint, language = 'en', country = '', team = '') {
             author: post.author,
             guid: post.guid,
             pub_date: moment(post.pubDate),
+            language: language,
+            country: country,
+            team: team,
           }
           const newArticle = await Article.findOneAndUpdate(filter, update, {
             new: true,
             upsert: true,
+            useFindAndModify: true,
           })
-          console.log('newArticle ===>', newArticle)
+          console.log(`${team} ===>`, newArticle)
         }
       })
 
@@ -91,24 +94,9 @@ function done(err) {
     return process.exit(1)
   }
   // server.close()
-  // process.exit()
+  //   process.exit()
 }
 
-// Don't worry about this. It's just a localhost file server so you can be
-// certain the "remote" feed is available when you run this example.
-
-connect()
-function connect() {
-  mongoose.connection
-    .on('error', console.log)
-    .on('disconnected', connect)
-    .once('open', function () {
-      console.log('MONGO connected')
-      parse()
-    })
-  return mongoose.connect('mongodb://127.0.0.1:27017/fantalk', {
-    keepAlive: 1,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+module.exports = {
+  parse,
 }
