@@ -22,8 +22,8 @@ function parse(feedEndpoint, language = 'en', country = '', team = '') {
     .then(function (res) {
       // Setup feedparser stream
       var feedparser = new FeedParser()
-      feedparser.on('error', done)
-      feedparser.on('end', done)
+      feedparser.on('error', (e) => done(e, feedEndpoint))
+      feedparser.on('end', () => done(null, feedEndpoint))
       feedparser.on('readable', async function () {
         var post
         while ((post = this.read())) {
@@ -42,19 +42,19 @@ function parse(feedEndpoint, language = 'en', country = '', team = '') {
             upsert: true,
             useFindAndModify: true,
           })
-          console.log(`${team} ===>`, newArticle)
+          //   console.log(`${team} ===>`, newArticle)
         }
       })
 
       // Handle our response and pipe it to feedparser
-      if (res.status != 200) throw new Error('Bad status code')
+      if (res.status !== 200) throw new Error('Bad status code')
       var charset = getParams(res.headers.get('content-type') || '').charset
       var responseStream = res.body
       responseStream = maybeTranslate(responseStream, charset)
       // And boom goes the dynamite
       responseStream.pipe(feedparser)
     })
-    .catch(done)
+    .catch((e) => done(e, feedEndpoint))
 }
 
 function maybeTranslate(res, charset) {
@@ -88,13 +88,12 @@ function getParams(str) {
   return params
 }
 
-function done(err) {
+function done(err, feedEndpoint = '') {
   if (err) {
     console.log(err, err.stack)
-    return process.exit(1)
+    console.log('ERROR ====>', feedEndpoint)
   }
-  // server.close()
-  //   process.exit()
+  console.log('SUCCESS ====>', feedEndpoint)
 }
 
 module.exports = {

@@ -19,7 +19,8 @@ router.get('/api/teams', async (req, res, next) => {
 
 router.get('/api/articles/country/:countryName', async (req, res, next) => {
   const { countryName } = req.params
-  const articles = await Article.find({})
-  console.log('/api/articles/country/')
+  const articles = await Article.find({ country: countryName })
+  console.log('/api/articles/country/', articles)
+  res.send(articles)
 })
 module.exports = router
