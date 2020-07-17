@@ -1,7 +1,6 @@
 import React from 'react'
-import { Container, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core'
-
+import { makeStyles, Container, Typography } from '@material-ui/core'
+import moment from 'moment'
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
@@ -30,30 +29,31 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid rgba(0, 0, 0, .1)',
   },
 }))
-
-const Home = () => {
+const HomePage = ({ articles, loading, fail }) => {
   const classes = useStyles()
+  if (loading) return <h1> Loading... </h1>
+  else if (fail) return <h1> Request Error </h1>
   return (
     <Container className={classes.root}>
       <div className={classes.page}>
         <Typography variant="h4"> FOOTBALL NEWS </Typography>
         <Typography variant="body1">
-          Recently Ozil claimed that he is prepared for the next match which
-          against the Liverpool FC. Neymar JR is missing the life in Barcelona
-          and especially Messi was not only partner but he was really good
-          friend
+          Welcome Team Page
           <a href="#"> Read More </a>
         </Typography>
       </div>
-      <div className={classes.article}>
-        <Typography variant="h5">
-          'It's life or death' - FIFA medical cheif D'Hooghe says football
-          shouldn't return until after summer.
-        </Typography>
-        <Typography variant="body1"> 32 mins ago - The Telegraph </Typography>
-      </div>
+      {articles.map((article) => {
+        return (
+          <div className={classes.article}>
+            <Typography variant="h5">{article.title}</Typography>
+            <Typography variant="body1">
+              {moment(article.pub_date).fromNow()} - {article.feed}
+            </Typography>
+          </div>
+        )
+      })}
     </Container>
   )
 }
 
-export default Home
+export default HomePage

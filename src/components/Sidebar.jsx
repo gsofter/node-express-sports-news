@@ -7,6 +7,7 @@ import {
   ListItemIcon,
   ListItemText,
   Collapse,
+  Divider,
 } from '@material-ui/core'
 import { makeStyles, withStyles } from '@material-ui/core'
 
@@ -60,7 +61,16 @@ const MenuSubItem = withStyles({
   },
 })(ListItem)
 
-const CountryItem = ({ country, handleClickCountry, handleClickTeam }) => {
+const MenuItemDivider = withStyles({
+  root: { color: '#a5a5a5' },
+})(Divider)
+
+const CountryItem = ({
+  country,
+  handleClickCountry,
+  handleClickTeam,
+  handleClickLanguage,
+}) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
   const handleClick = (e) => {
@@ -103,12 +113,27 @@ const CountryItem = ({ country, handleClickCountry, handleClickTeam }) => {
   )
 }
 
+const LanguageItem = ({ language, handleClickLanguage }) => {
+  const classes = useStyles()
+  return (
+    <MenuSubItem
+      button
+      className={classes.nested}
+      onClick={handleClickLanguage}
+    >
+      <ListItemText>{language.name}</ListItemText>
+    </MenuSubItem>
+  )
+}
+
 const Sidebar = ({
   isOpen,
   closeMenu,
   teams,
+  languages,
   handleClickCountry,
   handleClickTeam,
+  handleClickLanguage,
 }) => {
   const classes = useStyles()
 
@@ -137,6 +162,16 @@ const Sidebar = ({
               key={country}
               handleClickCountry={handleClickCountry}
               handleClickTeam={handleClickTeam}
+            />
+          ))}
+          <MenuItemDivider />
+          <ListItem>
+            <ListItemText> Language: </ListItemText>
+          </ListItem>
+          {languages.map((language) => (
+            <LanguageItem
+              handleClick={handleClickLanguage}
+              language={language}
             />
           ))}
         </List>

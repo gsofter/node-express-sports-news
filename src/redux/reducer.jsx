@@ -5,6 +5,7 @@ import * as actions from './actions'
 let initState = {
   teams: [],
   languages: [],
+  myLanguage: 'EN',
 }
 
 const groupTeams = (teams) => {
@@ -30,6 +31,20 @@ const reducer = handleActions(
       return {
         ...state,
         teams: gTeams,
+      }
+    },
+    [actions.INIT_LANGUAGES]: (state, action) => {
+      const languages = action.payload
+      return {
+        ...state,
+        languages: languages,
+      }
+    },
+    [actions.SET_MY_LANGUAGE]: (state, action) => {
+      const language = action.payload
+      return {
+        ...state,
+        myLanguage: language,
       }
     },
   },

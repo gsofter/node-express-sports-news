@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 const Sidebar = ({ isOpen, toggleMenu }) => {
   const teams = useSelector((state) => state.teams)
+  const languages = useSelector((state) => state.languages)
   const history = useHistory()
   const closeMenu = (e) => {
     toggleMenu(false)
@@ -23,6 +24,7 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
       closeMenu={closeMenu}
       isOpen={isOpen}
       teams={teams}
+      languages={languages}
       handleClickCountry={handleClickCountry}
       handleClickTeam={handleClickTeam}
     />

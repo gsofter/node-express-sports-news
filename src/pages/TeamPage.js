@@ -5,6 +5,7 @@ import * as api from '../api'
 const TeamPage = () => {
   const { teamName: teamStr } = useParams()
   const teamName = decodeURI(teamStr)
+  console.log('teamName ===>', teamName)
   const [loading, setLoading] = useState(true)
   const [fail, setFail] = useState(false)
   const [articles, setArticles] = useState([])

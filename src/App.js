@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import Header from './containers/Header'
 import Sidebar from './containers/Sidebar'
 import Searchbar from './containers/Searchbar'
-import Homepage from './pages/Home'
+import Homepage from './pages/HomePage'
 import { useDispatch } from 'react-redux'
-import { loadTeams } from './redux/actions'
+import { loadTeams, loadLanguages } from './redux/actions'
 import CountryPage from './pages/CountryPage'
 import TeamPage from './pages/TeamPage'
 export default function App() {
@@ -22,6 +22,7 @@ export default function App() {
 
   useEffect(() => {
     dispatch(loadTeams())
+    dispatch(loadLanguages())
   }, [dispatch])
 
   return (

@@ -59,12 +59,6 @@ const compose = () => {
         useFindAndModify: true,
       })
 
-      await Language.findOneAndUpdate(
-        { language: row['lang'] },
-        { language: row['lang'] },
-        { new: true, upsert: true, useFindAndModify: true },
-      )
-
       console.log('New Lang Feed ===>', newFeed)
     })
     .on('end', () => {
