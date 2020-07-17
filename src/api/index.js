@@ -17,3 +17,12 @@ export const getTeams = async () => {
 export const getCountryArticles = async (countryName) => {
   return await axios.get(`${API_ENDPOINT}/articles/country/${countryName}`)
 }
+
+/**
+ *
+ * Get Articles for team
+ * @param String countryName
+ */
+export const getTeamArticles = async (teamName) => {
+  return await axios.get(`${API_ENDPOINT}/articles/team/${teamName}`)
+}

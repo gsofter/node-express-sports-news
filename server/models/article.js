@@ -12,6 +12,7 @@ const ArticleSchema = new Schema({
   country: { type: String },
   language: { type: String },
   team: { type: String },
+  feed: { type: String },
   guid: { type: String },
   scope: { type: String, enum: ['team', 'lang'], default: 'team' },
 })

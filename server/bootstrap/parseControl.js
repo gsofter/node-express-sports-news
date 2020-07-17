@@ -23,10 +23,15 @@ function connect() {
 async function rssParse() {
   const teamfeeds = await TeamFeed.find({})
   teamfeeds.forEach((feed) => {
-    parse(feed.feed_url, feed.language, feed.country, feed.team_name)
+    parse(feed.feed_url, {
+      language: feed.language,
+      country: feed.country,
+      team: feed.team_name,
+      feed: feed.feed_name,
+    })
   })
   const langfeeds = await LangFeed.find({})
   langfeeds.forEach((feed) => {
-    parse(feed.feed_url, feed.lang_name)
+    parse(feed.feed_url, { language: feed.lang_name, feed: feed.feed_name })
   })
 }

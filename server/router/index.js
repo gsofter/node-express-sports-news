@@ -20,7 +20,17 @@ router.get('/api/teams', async (req, res, next) => {
 router.get('/api/articles/country/:countryName', async (req, res, next) => {
   const { countryName } = req.params
   const articles = await Article.find({ country: countryName })
-  console.log('/api/articles/country/', articles)
+    .sort('-pub_date')
+    .select('title pub_date country language team feed')
   res.send(articles)
 })
+
+router.get('/api/articles/team/:teamName', async (req, res, next) => {
+  const { teamName } = req.params
+  const articles = await Article.find({ team: teamName })
+    .sort('-pub_date')
+    .select('title pub_date country language team feed')
+  res.send(articles)
+})
+
 module.exports = router

@@ -8,6 +8,7 @@ import Homepage from './pages/Home'
 import { useDispatch } from 'react-redux'
 import { loadTeams } from './redux/actions'
 import CountryPage from './pages/CountryPage'
+import TeamPage from './pages/TeamPage'
 export default function App() {
   const dispatch = useDispatch()
   const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -31,6 +32,9 @@ export default function App() {
       <Switch>
         <Route path="/country/:countryName">
           <CountryPage />
+        </Route>
+        <Route path="/team/:teamName">
+          <TeamPage />
         </Route>
         <Route path="/">
           <Homepage />

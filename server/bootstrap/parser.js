@@ -12,7 +12,10 @@ var fetch = require('node-fetch')
 var FeedParser = require('feedparser')
 var iconv = require('iconv-lite')
 
-function parse(feedEndpoint, language = 'en', country = '', team = '') {
+function parse(
+  feedEndpoint,
+  { language = 'en', country = '', team = '', feed = '' },
+) {
   // Get a response stream
   fetch(feedEndpoint, {
     'user-agent':
@@ -36,6 +39,7 @@ function parse(feedEndpoint, language = 'en', country = '', team = '') {
             language: language,
             country: country,
             team: team,
+            feed: feed,
           }
           const newArticle = await Article.findOneAndUpdate(filter, update, {
             new: true,

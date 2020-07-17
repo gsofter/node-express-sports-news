@@ -14,12 +14,17 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
     history.push(`/country/${country}`)
   }
 
+  const handleClickTeam = (team) => {
+    toggleMenu(false)
+    history.push(`/team/${encodeURI(team)}`)
+  }
   return (
     <SidebarComponent
       closeMenu={closeMenu}
       isOpen={isOpen}
       teams={teams}
       handleClickCountry={handleClickCountry}
+      handleClickTeam={handleClickTeam}
     />
   )
 }

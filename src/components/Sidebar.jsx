@@ -60,7 +60,7 @@ const MenuSubItem = withStyles({
   },
 })(ListItem)
 
-const CountryItem = ({ country, handleClickCountry }) => {
+const CountryItem = ({ country, handleClickCountry, handleClickTeam }) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
   const handleClick = (e) => {
@@ -91,6 +91,7 @@ const CountryItem = ({ country, handleClickCountry }) => {
                 button
                 className={classes.nested}
                 key={team.team_name}
+                onClick={(e) => handleClickTeam(team.team_name)}
               >
                 <ListItemText>{team.team_name}</ListItemText>
               </MenuSubItem>
@@ -102,10 +103,15 @@ const CountryItem = ({ country, handleClickCountry }) => {
   )
 }
 
-const Sidebar = ({ isOpen, closeMenu, teams, handleClickCountry }) => {
+const Sidebar = ({
+  isOpen,
+  closeMenu,
+  teams,
+  handleClickCountry,
+  handleClickTeam,
+}) => {
   const classes = useStyles()
 
-  console.log('teams ===>', teams)
   return (
     <Drawer anchor="left" open={isOpen} onClose={closeMenu}>
       <div className={classes.root}>
@@ -130,6 +136,7 @@ const Sidebar = ({ isOpen, closeMenu, teams, handleClickCountry }) => {
               country={country}
               key={country}
               handleClickCountry={handleClickCountry}
+              handleClickTeam={handleClickTeam}
             />
           ))}
         </List>
