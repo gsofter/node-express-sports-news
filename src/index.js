@@ -4,11 +4,20 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import FantalkTheme from './config/theme'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import Reducer from './redux/reducer'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
+const store = createStore(Reducer, composeWithDevTools(applyMiddleware(thunk)))
+
 ReactDOM.render(
   <React.StrictMode>
-    <FantalkTheme>
-      <App />
-    </FantalkTheme>
+    <Provider store={store}>
+      <FantalkTheme>
+        <App />
+      </FantalkTheme>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 )

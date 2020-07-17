@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     borderBottom: '1px solid rgba(0, 0, 0, .1)',
   },
+
   article: {
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(3),

@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from '@material-ui/icons/Search'
-
+import path from 'path'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -63,7 +63,10 @@ export default function Header({ openMenu, openSearch }) {
             <MenuIcon />
           </IconButton>
           <div className={classes.logo} variant="h6" noWrap>
-            <img src="ft-logo.png" alt="fantalk-logo" />
+            <img
+              src={path.resolve(__dirname, 'ft-logo.png')}
+              alt="fantalk-logo"
+            />
           </div>
           <IconButton
             edge="start"

@@ -1,13 +1,11 @@
 require('dotenv').config()
+const cors = require('cors')
 const express = require('express')
 const mongoose = require('mongoose')
 const config = require('../config')
 const app = express()
 const router = require('./router')
 const bootstrap = require('./bootstrap')
-
-app.use(router)
-bootstrap.compose()
 
 connect()
 function connect() {
@@ -26,8 +24,15 @@ function connect() {
 }
 
 function listen() {
+  bootstrap.compose()
+  const whitelist = ['http://localhost:3000']
+  const corsOptions = {
+    origin: whitelist,
+  }
+  app.use(cors(corsOptions))
+  app.use(router)
   app.listen(process.env.PORT || 5000, () =>
-    console.log('token server running on 5000'),
+    console.log('Server running on 5000'),
   )
 }
 

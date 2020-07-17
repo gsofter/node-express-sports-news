@@ -50,24 +50,56 @@ const MenuHeader = withStyles({
 const MenuItem = withStyles({
   root: {
     color: 'white',
-    fontStyle: 'bold',
+    fontWeight: '700',
   },
 })(ListItem)
 
 const MenuSubItem = withStyles({
   root: {
     color: '#a5a5a5',
-    fontStyle: 'regular',
   },
 })(ListItem)
 
-const Sidebar = ({ isOpen, closeMenu }) => {
+const CountryItem = ({ country, handleClickCountry }) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
-
   const handleClick = () => {
     setOpen(!open)
   }
+
+  return (
+    <>
+      <MenuItem button onClick={() => handleClickCountry(country.country)}>
+        <ListItemText>{country.country}</ListItemText>
+        {open ? (
+          <ExpandLess onClick={handleClick} />
+        ) : (
+          <ExpandMore onClick={handleClick} />
+        )}
+      </MenuItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {country.teams.map((team) => {
+            return (
+              <MenuSubItem
+                button
+                className={classes.nested}
+                key={team.team_name}
+              >
+                <ListItemText>{team.team_name}</ListItemText>
+              </MenuSubItem>
+            )
+          })}
+        </List>
+      </Collapse>
+    </>
+  )
+}
+
+const Sidebar = ({ isOpen, closeMenu, teams, handleClickCountry }) => {
+  const classes = useStyles()
+
+  console.log('teams ===>', teams)
   return (
     <Drawer anchor="left" open={isOpen} onClose={closeMenu}>
       <div className={classes.root}>
@@ -87,17 +119,13 @@ const Sidebar = ({ isOpen, closeMenu }) => {
             </MenuHeader>
           }
         >
-          <MenuItem button onClick={handleClick}>
-            <ListItemText primary="Inbox" />
-            {open ? <ExpandLess /> : <ExpandMore />}
-          </MenuItem>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <MenuSubItem button className={classes.nested}>
-                <ListItemText primary="Starred" />
-              </MenuSubItem>
-            </List>
-          </Collapse>
+          {teams.map((country) => (
+            <CountryItem
+              country={country}
+              key={country}
+              handleClickCountry={handleClickCountry}
+            />
+          ))}
         </List>
       </div>
     </Drawer>
