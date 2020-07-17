@@ -1,6 +1,8 @@
 import React from 'react'
 import HeaderComponent from '../components/Header'
+import { useHistory } from 'react-router-dom'
 const Header = ({ toggleMenu, toggleSearch }) => {
+  const history = useHistory()
   const openMenu = (e) => {
     toggleMenu(true)
   }
@@ -9,6 +11,15 @@ const Header = ({ toggleMenu, toggleSearch }) => {
     toggleSearch(true)
   }
 
-  return <HeaderComponent openMenu={openMenu} openSearch={openSearch} />
+  const handleLogoClick = (e) => {
+    history.push('/')
+  }
+  return (
+    <HeaderComponent
+      openMenu={openMenu}
+      openSearch={openSearch}
+      handleLogoClick={handleLogoClick}
+    />
+  )
 }
 export default Header

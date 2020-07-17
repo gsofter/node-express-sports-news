@@ -46,7 +46,13 @@ const HeaderAppBar = withStyles({
   },
 })(AppBar)
 
-export default function Header({ openMenu, openSearch }) {
+const LogoIconButton = withStyles({
+  root: {
+    borderRadius: '0px',
+  },
+})(IconButton)
+
+export default function Header({ openMenu, openSearch, handleLogoClick }) {
   const classes = useStyles()
 
   return (
@@ -63,10 +69,12 @@ export default function Header({ openMenu, openSearch }) {
             <MenuIcon />
           </IconButton>
           <div className={classes.logo} variant="h6" noWrap>
-            <img
-              src={path.resolve(__dirname, 'ft-logo.png')}
-              alt="fantalk-logo"
-            />
+            <LogoIconButton edge="end" onClick={handleLogoClick}>
+              <img
+                src={path.resolve(__dirname, 'ft-logo.png')}
+                alt="fantalk-logo"
+              />
+            </LogoIconButton>
           </div>
           <IconButton
             edge="start"
