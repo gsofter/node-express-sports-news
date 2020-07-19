@@ -25,12 +25,21 @@ const useStyles = makeStyles((theme) => ({
       width: theme.mobileSidebarWidth,
     },
 
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(1),
     '& #nested-list-subheader': {
       color: 'white',
+    },
+    '& .countryMenu': {
+      borderTop: '1px solid #373960',
     },
   },
   nested: {
     color: '#a5a5a5',
+  },
+
+  language: {
+    borderTop: '1px solid #373960',
   },
 }))
 
@@ -52,7 +61,6 @@ const MenuItem = withStyles({
   root: {
     color: 'white',
     fontWeight: '700',
-    borderTop: '1px solid white',
   },
 })(ListItem)
 
@@ -63,15 +71,16 @@ const MenuSubItem = withStyles({
 })(ListItem)
 
 const MenuItemDivider = withStyles({
-  root: { color: '#a5a5a5' },
+  root: {
+    color: 'white',
+    width: '100%',
+    backgroundColor: 'white',
+    height: '1px',
+    marginRight: '20px',
+  },
 })(Divider)
 
-const CountryItem = ({
-  country,
-  handleClickCountry,
-  handleClickTeam,
-  handleClickLanguage,
-}) => {
+const CountryItem = ({ country, handleClickCountry, handleClickTeam }) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
   const handleClick = (e) => {
@@ -80,7 +89,7 @@ const CountryItem = ({
   }
 
   return (
-    <>
+    <div className="countryMenu">
       <MenuItem
         button
         onClick={(e) => {
@@ -118,7 +127,7 @@ const CountryItem = ({
           })}
         </List>
       </Collapse>
-    </>
+    </div>
   )
 }
 
@@ -173,16 +182,17 @@ const Sidebar = ({
               handleClickTeam={handleClickTeam}
             />
           ))}
-          <MenuItemDivider />
-          <ListItem>
-            <ListItemText> Language: </ListItemText>
-          </ListItem>
-          {languages.map((language) => (
-            <LanguageItem
-              handleClickLanguage={handleClickLanguage}
-              language={language}
-            />
-          ))}
+          <div className={classes.language}>
+            <ListItem>
+              <ListItemText> Language: </ListItemText>
+            </ListItem>
+            {languages.map((language) => (
+              <LanguageItem
+                handleClickLanguage={handleClickLanguage}
+                language={language}
+              />
+            ))}
+          </div>
         </List>
       </div>
     </Drawer>
