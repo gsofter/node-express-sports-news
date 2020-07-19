@@ -10,14 +10,19 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
     toggleMenu(false)
   }
 
-  const handleClickCountry = (country) => {
+  const handleClickCountry = (args) => {
     toggleMenu(false)
-    history.push(`/country/${country}`)
+    history.push(`/${args.language}/country/${args.country}`)
   }
 
-  const handleClickTeam = (team) => {
+  const handleClickTeam = (args) => {
     toggleMenu(false)
-    history.push(`/team/${encodeURI(team)}`)
+    history.push(`/${args.language}/team/${encodeURI(args.team)}`)
+  }
+
+  const handleClickLanguage = (language) => {
+    toggleMenu(false)
+    history.push(`/${language}`)
   }
   return (
     <SidebarComponent
@@ -27,6 +32,7 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
       languages={languages}
       handleClickCountry={handleClickCountry}
       handleClickTeam={handleClickTeam}
+      handleClickLanguage={handleClickLanguage}
     />
   )
 }

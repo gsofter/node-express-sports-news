@@ -26,20 +26,6 @@ const compose = () => {
         upsert: true,
         useFindAndModify: true,
       })
-
-      await Team.findOneAndUpdate(
-        {
-          language: row['Language'],
-          country: row['Country'],
-          team_name: row['Team'],
-        },
-        {},
-        {
-          new: true,
-          upsert: true,
-          useFindAndModify: true,
-        },
-      )
     })
     .on('end', () => {
       console.log('CSV file successfully processed')

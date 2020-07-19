@@ -52,6 +52,7 @@ const MenuItem = withStyles({
   root: {
     color: 'white',
     fontWeight: '700',
+    borderTop: '1px solid white',
   },
 })(ListItem)
 
@@ -83,7 +84,10 @@ const CountryItem = ({
       <MenuItem
         button
         onClick={(e) => {
-          handleClickCountry(country.country)
+          handleClickCountry({
+            country: country.country,
+            language: country.language,
+          })
         }}
       >
         <ListItemText>{country.country}</ListItemText>
@@ -100,10 +104,15 @@ const CountryItem = ({
               <MenuSubItem
                 button
                 className={classes.nested}
-                key={team.team_name}
-                onClick={(e) => handleClickTeam(team.team_name)}
+                key={team.name}
+                onClick={(e) =>
+                  handleClickTeam({
+                    team: team.name,
+                    language: country.language,
+                  })
+                }
               >
-                <ListItemText>{team.team_name}</ListItemText>
+                <ListItemText>{team.name}</ListItemText>
               </MenuSubItem>
             )
           })}
@@ -119,7 +128,7 @@ const LanguageItem = ({ language, handleClickLanguage }) => {
     <MenuSubItem
       button
       className={classes.nested}
-      onClick={handleClickLanguage}
+      onClick={(e) => handleClickLanguage(language.code)}
     >
       <ListItemText>{language.name}</ListItemText>
     </MenuSubItem>
@@ -170,7 +179,7 @@ const Sidebar = ({
           </ListItem>
           {languages.map((language) => (
             <LanguageItem
-              handleClick={handleClickLanguage}
+              handleClickLanguage={handleClickLanguage}
               language={language}
             />
           ))}

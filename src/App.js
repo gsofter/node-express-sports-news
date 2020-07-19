@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from 'react-router-dom'
 
 import Header from './containers/Header'
 import Sidebar from './containers/Sidebar'
@@ -31,14 +37,17 @@ export default function App() {
       <Sidebar toggleMenu={toggleMenu} isOpen={isOpenMenu} />
       <Searchbar toggleSearch={toggleSearch} isOpen={isOpenSearch} />
       <Switch>
-        <Route path="/country/:countryName">
+        <Route path="/:language/country/:countryName">
           <CountryPage />
         </Route>
-        <Route path="/team/:teamName">
+        <Route path="/:language/team/:teamName">
           <TeamPage />
         </Route>
-        <Route path="/">
+        <Route path="/:language/">
           <Homepage />
+        </Route>
+        <Route path="*">
+          <Redirect to="/en" />
         </Route>
       </Switch>
     </Router>

@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
     '& p': {
       color: '#a5a5a5',
     },
+    '& a': {
+      textDecoration: 'none',
+      color: 'black',
+    },
   },
 
   page: {
@@ -45,7 +49,11 @@ const TeamPage = ({ teamName, articles, loading, fail }) => {
       {articles.map((article) => {
         return (
           <div className={classes.article}>
-            <Typography variant="h5">{article.title}</Typography>
+            <Typography variant="h5">
+              <a href={article.link} target="_blank" rel="noopener noreferrer">
+                {article.title}
+              </a>
+            </Typography>
             <Typography variant="body1">
               {moment(article.pub_date).fromNow()} - {article.feed}
             </Typography>

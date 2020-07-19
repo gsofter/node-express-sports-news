@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import HomePageComponent from '../components/HomePage'
 import * as api from '../api'
+import { useParams } from 'react-router-dom'
 const Home = () => {
-  const myLanguage = useSelector((state) => state.myLanguage)
   const [loading, setLoading] = useState(true)
   const [fail, setFail] = useState(false)
   const [articles, setArticles] = useState([])
+  const { language: myLanguage } = useParams()
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,7 +19,7 @@ const Home = () => {
       }
     }
     fetchData()
-  }, [])
+  }, [myLanguage])
   return <HomePageComponent articles={articles} loading={loading} fail={fail} />
 }
 

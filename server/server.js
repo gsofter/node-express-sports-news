@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const config = require('../config')
 const app = express()
 const router = require('./router')
-const bootstrap = require('./bootstrap')
 
 connect()
 function connect() {
@@ -24,7 +23,6 @@ function connect() {
 }
 
 function listen() {
-  bootstrap.compose()
   const whitelist = ['http://localhost:3000']
   const corsOptions = {
     origin: whitelist,

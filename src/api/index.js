@@ -18,5 +18,5 @@ export const getTeamArticles = async (teamName) => {
 }
 
 export const getLanguageArticles = async (languageCode) => {
-  return await axios.get(`${API_ENDPOINT}/articles/team/${languageCode}`)
+  return await axios.get(`${API_ENDPOINT}/articles/language/${languageCode}`)
 }
