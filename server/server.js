@@ -34,6 +34,7 @@ function listen() {
   app.get('*', function (req, res) {
     res.sendFile(path.resolve('build', 'index.html'))
   })
+  console.log(process.env.PORT)
   app.listen(process.env.PORT || 5000, () =>
     console.log('Server running on 5000'),
   )
