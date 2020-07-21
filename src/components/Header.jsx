@@ -19,11 +19,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginLeft: '-15px',
   },
 
   searchButton: {
     justifyContent: 'flex-end',
+    marginRight: '-20px',
   },
 
   logo: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     '& img': {
       maxHeight: theme.spacing(5),
+      marginLeft: '-7px',
     },
     [theme.breakpoints.down('sm')]: {
       '& img': {
