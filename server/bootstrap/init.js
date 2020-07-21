@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
+const { compose: feedUrls } = require('./feedUrls')
 require('../models/language')
 require('../models/team')
-const config = require('../../config')
 const Team = mongoose.model('team')
 const Language = mongoose.model('language')
 
@@ -32,26 +32,52 @@ const teams = [
   },
 ]
 
-const feed = () => {
-  teams.forEach((item) => {
-    console.log('item =>', item)
-    const insert = async () => {
-      const newTeam = await Team.findOneAndUpdate(
-        { country: item.country },
-        {
-          language: item.language,
-          teams: item.teams,
-        },
-        {
-          new: true,
-          upsert: true,
-          useFindAndModify: true,
-        },
-      )
-      console.log('newTeam ====>', newTeam)
-    }
-    insert()
-  })
+const languages = [
+  {
+    code: 'en',
+    name: 'English',
+  },
+  {
+    code: 'it',
+    name: 'Italy',
+  },
+]
+
+const feedTeams = async () => {
+  for (const item of teams) {
+    const newTeam = await Team.findOneAndUpdate(
+      { country: item.country },
+      {
+        language: item.language,
+        teams: item.teams,
+      },
+      {
+        new: true,
+        upsert: true,
+        useFindAndModify: true,
+      },
+    )
+    console.log('newTeam ====>', newTeam)
+  }
+}
+
+const feedLanguages = async () => {
+  for (const item of languages) {
+    const newLanguage = await Language.findOneAndUpdate(
+      {
+        code: item.code,
+      },
+      {
+        name: item.name,
+      },
+      {
+        new: true,
+        upsert: true,
+        useFindAndModify: true,
+      },
+    )
+    console.log('newLanguage ====>', newLanguage)
+  }
 }
 
 function connect() {
@@ -60,7 +86,10 @@ function connect() {
     .on('disconnected', connect)
     .once('open', function () {
       console.log('MONGO connected')
-      feed()
+      feedTeams()
+      feedLanguages()
+      feedUrls()
+      //Promise.all([feedTeams, feedLanguages]).then(process.exit)
     })
   return mongoose.connect('mongodb://localhost:27017/fantalk', {
     keepAlive: 1,
