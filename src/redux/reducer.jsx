@@ -6,23 +6,8 @@ let initState = {
   teams: [],
   languages: [],
   myLanguage: 'EN',
+  myTeam: {},
 }
-
-// const groupTeams = (teams) => {
-//   var groups = {}
-//   for (let i = 0; i < teams.length; i++) {
-//     var countryName = teams[i].country
-//     if (!groups[countryName]) {
-//       groups[countryName] = []
-//     }
-//     groups[countryName].push(teams[i])
-//   }
-//   let groupArray = []
-//   for (countryName in groups) {
-//     groupArray.push({ country: countryName, teams: groups[countryName] })
-//   }
-//   return groupArray
-// }
 
 const reducer = handleActions(
   {
@@ -44,6 +29,13 @@ const reducer = handleActions(
       return {
         ...state,
         myLanguage: language,
+      }
+    },
+    [actions.SET_MY_TEAM]: (state, action) => {
+      const team = action.payload
+      return {
+        ...state,
+        myTeam: team,
       }
     },
   },

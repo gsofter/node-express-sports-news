@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles, Container, Typography } from '@material-ui/core'
-import moment from 'moment'
+import Articles from './Articles'
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
@@ -26,12 +26,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(3),
     borderBottom: '1px solid rgba(0, 0, 0, .1)',
   },
-
-  article: {
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    borderBottom: '1px solid rgba(0, 0, 0, .1)',
-  },
 }))
 const CountryPage = ({ country, articles, loading }) => {
   const classes = useStyles()
@@ -47,21 +41,8 @@ const CountryPage = ({ country, articles, loading }) => {
           friend
           <a href="#"> Read More </a>
         </Typography>
+        <Articles articles={articles} />
       </div>
-      {articles.map((article) => {
-        return (
-          <div className={classes.article}>
-            <Typography variant="h5">
-              <a href={article.link} target="_blank" rel="noopener noreferrer">
-                {article.title}
-              </a>
-            </Typography>
-            <Typography variant="body1">
-              {moment(article.pub_date).fromNow()} - {article.feed}
-            </Typography>
-          </div>
-        )
-      })}
     </Container>
   )
 }

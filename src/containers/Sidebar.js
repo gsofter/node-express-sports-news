@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import SidebarComponent from '../components/Sidebar'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { setMyTeam } from '../redux/actions'
 const Sidebar = ({ isOpen, toggleMenu }) => {
   const teams = useSelector((state) => state.teams)
   const languages = useSelector((state) => state.languages)
   const history = useHistory()
+  const dispatch = useDispatch()
   const closeMenu = (e) => {
     toggleMenu(false)
   }
@@ -17,7 +19,8 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
 
   const handleClickTeam = (args) => {
     toggleMenu(false)
-    history.push(`/${args.language}/team/${encodeURI(args.team)}`)
+    dispatch(setMyTeam({ ...args.team, language: args.language }))
+    history.push(`/${args.language}/team/${encodeURI(args.team.name)}`)
   }
 
   const handleClickLanguage = (language) => {

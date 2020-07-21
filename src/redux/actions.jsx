@@ -3,9 +3,11 @@ import * as api from '../api'
 export const INIT_TEAMS = 'INIT_TEAMS'
 export const INIT_LANGUAGES = 'INIT_LANGUAGES'
 export const SET_MY_LANGUAGE = 'SET_MY_LANGUAGE'
+export const SET_MY_TEAM = 'SET_MY_TEAM'
 export const initTeams = createAction(INIT_TEAMS)
 export const initLanguages = createAction(INIT_LANGUAGES)
 export const setMyLanguage = createAction(SET_MY_LANGUAGE)
+export const setMyTeam = createAction(SET_MY_TEAM)
 
 export const loadTeams = () => async (dispatch) => {
   try {

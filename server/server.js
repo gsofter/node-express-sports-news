@@ -34,4 +34,4 @@ function listen() {
   )
 }
 
-module.exports = app
+module.exports = { connect }

@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { makeStyles, Container, Typography } from '@material-ui/core'
-import moment from 'moment'
+import Articles from './Articles'
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
@@ -22,10 +23,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  page: {
-    paddingBottom: theme.spacing(3),
-    borderBottom: '1px solid rgba(0, 0, 0, .1)',
-  },
+  page: {},
+  teamHeader: {},
 
   article: {
     paddingTop: theme.spacing(3),
@@ -33,33 +32,21 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid rgba(0, 0, 0, .1)',
   },
 }))
-const TeamPage = ({ teamName, articles, loading, fail }) => {
+const TeamPage = ({ team, articles, loading, fail }) => {
   const classes = useStyles()
   if (loading) return <h1> Loading... </h1>
   else if (fail) return <h1> Request Error </h1>
   return (
     <Container className={classes.root}>
+      <div className={classes.teamHeader}>{}</div>
       <div className={classes.page}>
-        <Typography variant="h4"> {teamName} FOOTBALL NEWS </Typography>
+        <Typography variant="h4"> {team.name} FOOTBALL NEWS </Typography>
         <Typography variant="body1">
           Welcome Team Page
           <a href="#"> Read More </a>
         </Typography>
       </div>
-      {articles.map((article) => {
-        return (
-          <div className={classes.article}>
-            <Typography variant="h5">
-              <a href={article.link} target="_blank" rel="noopener noreferrer">
-                {article.title}
-              </a>
-            </Typography>
-            <Typography variant="body1">
-              {moment(article.pub_date).fromNow()} - {article.feed}
-            </Typography>
-          </div>
-        )
-      })}
+      <Articles articles={articles} />
     </Container>
   )
 }

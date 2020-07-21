@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { makeStyles, Container, Typography } from '@material-ui/core'
-import moment from 'moment'
+import Articles from './Articles'
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
@@ -46,20 +47,7 @@ const HomePage = ({ articles, loading, fail }) => {
           <a href="#"> Read More </a>
         </Typography>
       </div>
-      {articles.map((article) => {
-        return (
-          <div className={classes.article}>
-            <Typography variant="h5">
-              <a href={article.link} target="_blank" rel="noopener noreferrer">
-                {article.title}
-              </a>
-            </Typography>
-            <Typography variant="body1">
-              {moment(article.pub_date).fromNow()} - {article.feed}
-            </Typography>
-          </div>
-        )
-      })}
+      <Articles articles={articles} />
     </Container>
   )
 }

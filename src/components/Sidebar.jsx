@@ -70,16 +70,6 @@ const MenuSubItem = withStyles({
   },
 })(ListItem)
 
-const MenuItemDivider = withStyles({
-  root: {
-    color: 'white',
-    width: '100%',
-    backgroundColor: 'white',
-    height: '1px',
-    marginRight: '20px',
-  },
-})(Divider)
-
 const CountryItem = ({ country, handleClickCountry, handleClickTeam }) => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
@@ -116,7 +106,7 @@ const CountryItem = ({ country, handleClickCountry, handleClickTeam }) => {
                 key={team.name}
                 onClick={(e) =>
                   handleClickTeam({
-                    team: team.name,
+                    team: team,
                     language: country.language,
                   })
                 }
