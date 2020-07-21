@@ -1,6 +1,7 @@
 require('dotenv').config()
 const cors = require('cors')
 const express = require('express')
+const path = require('path')
 const mongoose = require('mongoose')
 const config = require('../config')
 const app = express()
@@ -28,7 +29,11 @@ function listen() {
     origin: whitelist,
   }
   app.use(cors(corsOptions))
-  app.use(router)
+  app.use('/api', router)
+  app.use(express.static('./build/'))
+  app.get('*', function (req, res) {
+    res.sendFile(path.resolve('build', 'index.html'))
+  })
   app.listen(process.env.PORT || 5000, () =>
     console.log('Server running on 5000'),
   )

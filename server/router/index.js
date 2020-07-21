@@ -14,17 +14,17 @@ router.get('/test', async (req, res, next) => {
   res.send('testing')
 })
 
-router.get('/api/teams', async (req, res, next) => {
+router.get('/teams', async (req, res, next) => {
   const teams = await Team.find({})
   res.send(teams)
 })
 
-router.get('/api/languages', async (req, res, next) => {
+router.get('/languages', async (req, res, next) => {
   const languages = await Language.find({}).select('code name')
   res.send(languages)
 })
 
-router.get('/api/articles/country/:countryName', async (req, res, next) => {
+router.get('/articles/country/:countryName', async (req, res, next) => {
   const { countryName } = req.params
   const articles = await Article.find({ country: countryName })
     .sort('-pub_date')
@@ -33,7 +33,7 @@ router.get('/api/articles/country/:countryName', async (req, res, next) => {
   res.send(articles)
 })
 
-router.get('/api/articles/team/:teamName', async (req, res, next) => {
+router.get('/articles/team/:teamName', async (req, res, next) => {
   const { teamName } = req.params
   const articles = await Article.find({ team: teamName })
     .sort('-pub_date')
@@ -42,7 +42,7 @@ router.get('/api/articles/team/:teamName', async (req, res, next) => {
   res.send(articles)
 })
 
-router.get('/api/articles/language/:languageCode', async (req, res, next) => {
+router.get('/articles/language/:languageCode', async (req, res, next) => {
   const { languageCode } = req.params
   const articles = await Article.find({ language: languageCode })
     .sort('-pub_date')
