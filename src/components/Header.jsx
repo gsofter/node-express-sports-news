@@ -38,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+
+  offset: theme.mixins.toolbar,
 }))
 
 const HeaderAppBar = withStyles({
@@ -57,7 +59,7 @@ export default function Header({ openMenu, openSearch, handleLogoClick }) {
 
   return (
     <div className={classes.root}>
-      <HeaderAppBar position="static">
+      <HeaderAppBar position="fixed">
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
@@ -87,6 +89,7 @@ export default function Header({ openMenu, openSearch, handleLogoClick }) {
           </IconButton>
         </Toolbar>
       </HeaderAppBar>
+      <div className={classes.offset} />
     </div>
   )
 }
