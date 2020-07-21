@@ -24,7 +24,11 @@ function connect() {
 }
 
 function listen() {
-  const whitelist = ['http://localhost:3000']
+  const whitelist = [
+    'http://localhost:3000',
+    'http://localhost:5000',
+    'http://fantalks.com',
+  ]
   const corsOptions = {
     origin: whitelist,
   }
