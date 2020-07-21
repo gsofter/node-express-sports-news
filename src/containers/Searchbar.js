@@ -6,8 +6,8 @@ const Searchbar = ({ isOpen, toggleSearch }) => {
   const { language } = useParams()
   const history = useHistory()
   const search = (searchText) => {
-    history.push(`/${language}/search/${encodeURI(searchText)}`)
     toggleSearch(false)
+    history.push(`/${language}/search/${encodeURI(searchText)}`)
   }
   const closeSearch = (e) => {
     toggleSearch(false)

@@ -32,6 +32,16 @@ const useStyles = makeStyles((theme) => ({
     color: 'white',
     padding: '15px 10px',
   },
+
+  searchDrawer: {
+    root: {
+      border: '10px solid',
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+    },
+    paper: {
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+    },
+  },
 }))
 
 const SearchInput = withStyles({
@@ -56,7 +66,12 @@ const Searchbar = ({ isOpen, closeSearch, onSearch }) => {
     }
   }
   return (
-    <Drawer anchor="right" open={isOpen} onClose={closeSearch}>
+    <Drawer
+      anchor="right"
+      open={isOpen}
+      onClose={closeSearch}
+      classes={classes.searchDrawer}
+    >
       <div className={classes.root}>
         <div className={classes.headRow}>
           <Typography variant="h5"> SEARCH </Typography>
