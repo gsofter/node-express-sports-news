@@ -7,7 +7,6 @@ import {
   ListItemIcon,
   ListItemText,
   Collapse,
-  Divider,
 } from '@material-ui/core'
 import { makeStyles, withStyles } from '@material-ui/core'
 
@@ -46,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuItemIcon = withStyles({
   root: {
     color: 'white',
+    minWidth: '35px',
   },
 })(ListItemIcon)
 
@@ -54,6 +54,7 @@ const MenuHeader = withStyles({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    fontSize: '12pt',
   },
 })(ListSubheader)
 
@@ -61,12 +62,14 @@ const MenuItem = withStyles({
   root: {
     color: 'white',
     fontWeight: '700',
+    fontSize: '16pt',
   },
 })(ListItem)
 
 const MenuSubItem = withStyles({
   root: {
     color: '#a5a5a5',
+    fontSize: '14pt',
   },
 })(ListItem)
 

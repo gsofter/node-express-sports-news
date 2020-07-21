@@ -1,12 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { makeStyles, Container, Typography } from '@material-ui/core'
+import { makeStyles, Container } from '@material-ui/core'
 import Articles from './Articles'
+import PageTitle from './PageTitle'
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1),
+    },
+
+    [theme.breakpoints.up('md')]: {
+      width: '768px',
     },
 
     '& h1,h2,h3,h4,h5,h6': {
@@ -40,11 +45,11 @@ const TeamPage = ({ team, articles, loading, fail }) => {
     <Container className={classes.root}>
       <div className={classes.teamHeader}>{}</div>
       <div className={classes.page}>
-        <Typography variant="h4"> {team.name} FOOTBALL NEWS </Typography>
-        <Typography variant="body1">
+        <PageTitle variant="h1"> {team.name} FOOTBALL NEWS </PageTitle>
+        <PageTitle variant="body1">
           Welcome Team Page
           <a href="#"> Read More </a>
-        </Typography>
+        </PageTitle>
       </div>
       <Articles articles={articles} />
     </Container>

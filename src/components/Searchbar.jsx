@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
       width: theme.mobileSidebarWidth,
     },
     padding: theme.spacing(1),
+    '& h5': {
+      fontSize: '12pt',
+    },
   },
 
   headRow: {

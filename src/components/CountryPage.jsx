@@ -1,20 +1,16 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { makeStyles, Container, Typography } from '@material-ui/core'
+import { makeStyles, Container } from '@material-ui/core'
 import Articles from './Articles'
+import PageTitle from './PageTitle'
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1),
     },
-
-    '& h1,h2,h3,h4,h5,h6': {
-      color: 'black',
-      fontStyle: 'bold',
-      fontWeight: '700',
-    },
-    '& p': {
-      color: '#a5a5a5',
+    [theme.breakpoints.up('md')]: {
+      width: '768px',
     },
     '& a': {
       textDecoration: 'none',
@@ -33,14 +29,14 @@ const CountryPage = ({ country, articles, loading }) => {
   return (
     <Container className={classes.root}>
       <div className={classes.page}>
-        <Typography variant="h4"> {country} FOOTBALL NEWS </Typography>
-        <Typography variant="body1">
+        <PageTitle variant="h1"> {country} FOOTBALL NEWS </PageTitle>
+        <PageTitle variant="body1">
           Recently Ozil claimed that he is prepared for the next match which
           against the Liverpool FC. Neymar JR is missing the life in Barcelona
           and especially Messi was not only partner but he was really good
           friend
           <a href="#"> Read More </a>
-        </Typography>
+        </PageTitle>
         <Articles articles={articles} />
       </div>
     </Container>

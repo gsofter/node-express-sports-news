@@ -6,7 +6,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
-
+    [theme.breakpoints.up('md')]: {
+      width: '768px',
+    },
     '& p': {
       fontStyle: 'italic',
       color: '#a5a5a5',
@@ -19,14 +21,14 @@ const AboutusPage = () => {
   return (
     <Container className={classes.root}>
       <PageTitle variant="h1">ABOUT US</PageTitle>
-      <p>
+      <PageTitle variant="body1">
         We've created a sample About Us template designed to work well for
         virtually any online store, blog, or website. Just fill in the brackets
         with your company's information and you'll have a professional About Us
         page written in minutes. If you want to put a personal touch on your
         page (which we highly recommend), check out the About Us examples below
         the template.
-      </p>
+      </PageTitle>
     </Container>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { makeStyles, Typography } from '@material-ui/core'
 import moment from 'moment'
 const useStyles = makeStyles((theme) => ({
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     '& a': {
       textDecoration: 'none',
       color: 'black',
+      fontSize: '18pt',
     },
     borderTop: '1px solid rgba(0, 0, 0, .1)',
   },
@@ -35,25 +36,16 @@ const useStyles = makeStyles((theme) => ({
 
     '& .description': {
       paddingTop: theme.spacing(2),
+      fontSize: '12pt',
     },
   },
 }))
 
 const Articles = ({ articles }) => {
   const classes = useStyles()
-  useEffect(() => {
-    const adsbygoogle = window.adsbygoogle || []
-    adsbygoogle.push({})
-  }, [])
+
   return (
     <div className={classes.root}>
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-client="ca-pub-23452425"
-        data-ad-slot="24524524"
-        data-ad-format="auto"
-      ></ins>
       {articles.map((article) => {
         return (
           <div className={classes.article}>
