@@ -20,3 +20,12 @@ export const getTeamArticles = async (teamName) => {
 export const getLanguageArticles = async (languageCode) => {
   return await axios.get(`${API_ENDPOINT}/articles/language/${languageCode}`)
 }
+
+export const getSearchArticles = async (languageCode, searchText) => {
+  return await axios.get(`${API_ENDPOINT}/articles/search/`, {
+    params: {
+      languageCode,
+      searchText,
+    },
+  })
+}

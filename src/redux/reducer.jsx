@@ -5,7 +5,7 @@ import * as actions from './actions'
 let initState = {
   teams: [],
   languages: [],
-  myLanguage: 'EN',
+  myLanguage: 'en',
   myTeam: {},
 }
 

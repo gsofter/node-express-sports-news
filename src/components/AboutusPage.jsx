@@ -1,10 +1,6 @@
 import React from 'react'
-import {
-  Container,
-  Typography,
-  withStyles,
-  makeStyles,
-} from '@material-ui/core'
+import PageTitle from './PageTitle'
+import { Container, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,12 +13,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }))
-const PageTitle = withStyles({
-  h1: {
-    fontSize: '30px',
-    fontWeight: '700',
-  },
-})(Typography)
 
 const AboutusPage = () => {
   const classes = useStyles()

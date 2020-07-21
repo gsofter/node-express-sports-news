@@ -50,5 +50,18 @@ router.get('/articles/language/:languageCode', async (req, res, next) => {
     .limit(40)
   res.send(articles)
 })
-
+router.get('/articles/search/', async (req, res, next) => {
+  const { languageCode, searchText } = req.query
+  const articles = await Article.find({
+    language: languageCode,
+    title: {
+      $regex: searchText,
+      $options: 'i',
+    },
+  })
+    .sort('-pub_date')
+    .select('title pub_date country language team feed link')
+    .limit(40)
+  res.send(articles)
+})
 module.exports = router
