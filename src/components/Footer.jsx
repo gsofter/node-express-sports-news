@@ -5,21 +5,25 @@ import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: '#77c38b',
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
     '& a': {
       color: 'black',
+      fontSize: '16pt',
     },
     '& ul': {
       listStyle: 'none',
-      marginLeft: theme.spacing(-3),
+      marginLeft: '-40px',
     },
     '& ul>li': {
       paddingTop: theme.spacing(1),
     },
   },
-  container: {},
+  container: {
+    [theme.breakpoints.up('md')]: {
+      width: '768px',
+    },
+  },
 }))
 const Footer = ({ onClickAboutUs }) => {
   const classes = useStyles()
