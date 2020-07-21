@@ -59,7 +59,7 @@ export default function Header({ openMenu, openSearch, handleLogoClick }) {
 
   return (
     <div className={classes.root}>
-      <HeaderAppBar position="fixed">
+      <HeaderAppBar>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
