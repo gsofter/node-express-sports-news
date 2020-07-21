@@ -8,18 +8,15 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: theme.spacing(1),
     },
 
-    '& h1,h2,h3,h4,h5,h6': {
-      color: 'black',
-      fontStyle: 'bold',
-      fontWeight: '700',
-    },
-    '& p': {
-      color: '#a5a5a5',
-    },
     '& a': {
       textDecoration: 'none',
       color: 'black',
       fontSize: '18pt',
+      fontWeight: '700',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '18px',
+        lineHeight: '24px',
+      },
     },
     borderTop: '1px solid rgba(0, 0, 0, .1)',
   },
@@ -37,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
     '& .description': {
       paddingTop: theme.spacing(2),
       fontSize: '12pt',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '12px',
+        lineHeight: '18px',
+      },
+      color: '#a5a5a5',
     },
   },
 }))

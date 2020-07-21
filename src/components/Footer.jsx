@@ -9,7 +9,12 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
     '& a': {
       color: 'black',
-      fontSize: '16pt',
+      fontSize: '12pt',
+      lineHeight: '18pt',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '12px',
+        lineHeight: '18px',
+      },
     },
     '& ul': {
       listStyle: 'none',
