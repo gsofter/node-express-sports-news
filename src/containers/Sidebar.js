@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import SidebarComponent from '../components/Sidebar'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
