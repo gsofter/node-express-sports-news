@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
+    marginLeft: '-10px',
     '& #nested-list-subheader': {
       color: 'white',
     },
@@ -75,7 +76,7 @@ const MenuSubItem = withStyles({
 
 const CountryItem = ({ country, handleClickCountry, handleClickTeam }) => {
   const classes = useStyles()
-  const [open, setOpen] = React.useState(true)
+  const [open, setOpen] = React.useState(false)
   const handleClick = (e) => {
     e.stopPropagation()
     setOpen(!open)
