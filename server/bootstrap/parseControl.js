@@ -12,6 +12,7 @@ function connect() {
     .once('open', function () {
       console.log('MONGO connected')
       rssParse()
+      setTimeout(finish, 1000 * 60 * 5)
     })
   return mongoose.connect('mongodb://127.0.0.1:27017/fantalk', {
     keepAlive: 1,
@@ -34,4 +35,8 @@ async function rssParse() {
   langfeeds.forEach((feed) => {
     parse(feed.feed_url, { language: feed.lang_name, feed: feed.feed_name })
   })
+}
+
+function finish() {
+  process.exit(0)
 }
