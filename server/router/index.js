@@ -29,7 +29,6 @@ router.get('/articles/country/:countryName', async (req, res, next) => {
   const articles = await Article.find({ country: countryName })
     .sort('-pub_date')
     .select('title pub_date country language team feed link')
-    .limit(40)
   res.send(articles)
 })
 
@@ -38,7 +37,6 @@ router.get('/articles/team/:teamName', async (req, res, next) => {
   const articles = await Article.find({ team: teamName })
     .sort('-pub_date')
     .select('title pub_date country language team feed link')
-    .limit(40)
   res.send(articles)
 })
 
@@ -47,7 +45,6 @@ router.get('/articles/language/:languageCode', async (req, res, next) => {
   const articles = await Article.find({ language: languageCode })
     .sort('-pub_date')
     .select('title pub_date country language team feed link')
-    .limit(40)
   res.send(articles)
 })
 router.get('/articles/search/', async (req, res, next) => {
@@ -61,7 +58,6 @@ router.get('/articles/search/', async (req, res, next) => {
   })
     .sort('-pub_date')
     .select('title pub_date country language team feed link')
-    .limit(40)
   res.send(articles)
 })
 module.exports = router
