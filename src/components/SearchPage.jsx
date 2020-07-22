@@ -13,8 +13,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SearchPage = ({ searchText, articles }) => {
+const SearchPage = ({ searchText, articles, loading }) => {
   const classes = useStyles()
+  if (loading) return <h1> Loading... </h1>
   return (
     <Container className={classes.root}>
       <PageTitle variant="h1">SEARCH RESULTS</PageTitle>

@@ -20,14 +20,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     borderTop: '1px solid rgba(0, 0, 0, .1)',
-    '& a.sponsor': {
-      color: 'red',
-      fontSize: '12pt',
-      [theme.breakpoints.down('sm')]: {
-        fontSize: '12px',
-        lineHeight: '18px',
-      },
-    },
   },
 
   page: {
@@ -48,6 +40,16 @@ const useStyles = makeStyles((theme) => ({
         lineHeight: '18px',
       },
       color: '#a5a5a5',
+    },
+
+    '& .sponsored': {
+      paddingTop: theme.spacing(2),
+      fontSize: '12pt',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '12px',
+        lineHeight: '18px',
+      },
+      color: '#77c38b',
     },
   },
   banner: {},
@@ -120,12 +122,23 @@ const Articles = ({ articles }) => {
               <Typography variant="body1" className="description">
                 {moment(article.pub_date).fromNow()} - {article.feed}
               </Typography>
-              {index === 2 ? (
-                <a href="#" className="sponsor">
-                  Sponsored
-                </a>
-              ) : null}
             </div>
+            {index === 2 ? (
+              <div className={classes.article}>
+                <Typography variant="h5">
+                  <a
+                    href="https://www.unibet.eu/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Bet on AC Milan and get a free bet
+                  </a>
+                </Typography>
+                <Typography variant="body1" className="sponsored">
+                  Sponsored
+                </Typography>
+              </div>
+            ) : null}
             {index === 9 || index === 19 || index === 29 || index === 39 ? (
               <BannerAds />
             ) : null}

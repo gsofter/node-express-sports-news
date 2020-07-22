@@ -19,11 +19,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  page: {
-    paddingBottom: theme.spacing(3),
-    borderBottom: '1px solid rgba(0, 0, 0, .1)',
-  },
-
   article: {
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(3),
@@ -36,13 +31,11 @@ const HomePage = ({ articles, loading, fail }) => {
   else if (fail) return <h1> Request Error </h1>
   return (
     <Container className={classes.root}>
-      <div className={classes.page}>
-        <PageTitle variant="h1"> FOOTBALL NEWS </PageTitle>
-        <PageTitle variant="body1">
-          Welcome Team Page
-          <a href="#"> Read More </a>
-        </PageTitle>
-      </div>
+      <PageTitle variant="h1"> FOOTBALL NEWS </PageTitle>
+      <PageTitle variant="body1">
+        Welcome Language Wide Page
+        <a href="#"> Read More </a>
+      </PageTitle>
       <Articles articles={articles} />
     </Container>
   )
