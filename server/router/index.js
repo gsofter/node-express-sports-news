@@ -9,6 +9,8 @@ require('../models/language')
 const Team = mongoose.model('team')
 const Language = mongoose.model('language')
 const Article = mongoose.model('article')
+const LangFeed = mongoose.model('langfeed')
+const TeamFeed = mongoose.model('teamfeed')
 
 router.get('/test', async (req, res, next) => {
   res.send('testing')
@@ -63,5 +65,15 @@ router.get('/articles/search/', async (req, res, next) => {
     .select('title pub_date country language team feed link')
     .limit(500)
   res.send(articles)
+})
+
+// admin routes
+router.get('/feeds/lang', async (req, res) => {
+  const langFeeds = await LangFeed.find({})
+  res.send(langFeeds)
+})
+router.get('/feeds/team', async (req, res) => {
+  const teamFeeds = await TeamFeed.find({})
+  res.send(teamFeeds)
 })
 module.exports = router

@@ -28,6 +28,7 @@
     "express": "^4.17.1",
     "feedparser": "^2.2.10",
     "fs": "0.0.1-security",
+    "material-table": "^1.66.0",
     "moment": "^2.27.0",
     "mongoose": "^5.9.24",
     "node-fetch": "^2.6.0",

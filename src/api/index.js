@@ -29,3 +29,11 @@ export const getSearchArticles = async (languageCode, searchText) => {
     },
   })
 }
+
+// admin routes
+export const getLangFeeds = async () => {
+  return await axios.get(`${API_ENDPOINT}/feeds/lang`)
+}
+export const getTeamFeeds = async () => {
+  return await axios.get(`${API_ENDPOINT}/feeds/team`)
+}

@@ -17,6 +17,7 @@ import CountryPage from './pages/CountryPage'
 import TeamPage from './pages/TeamPage'
 import AboutusPage from './components/AboutusPage'
 import SearchPage from './pages/SearchPage'
+import AdminPage from './pages/admin'
 
 const GeneralComponents = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -47,31 +48,38 @@ export default function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/admin">
+          <AdminPage />
+        </Route>
         <Route path="/:language/country/:countryName">
           <GeneralComponents />
           <CountryPage />
+          <Footer />
         </Route>
         <Route path="/:language/team/:teamName">
           <GeneralComponents />
           <TeamPage />
+          <Footer />
         </Route>
         <Route path="/:language/search/:searchText">
           <GeneralComponents />
           <SearchPage />
+          <Footer />
         </Route>
         <Route path="/:language/aboutus/">
           <GeneralComponents />
           <AboutusPage />
+          <Footer />
         </Route>
         <Route path="/:language/">
           <GeneralComponents />
           <Homepage />
+          <Footer />
         </Route>
         <Route path="*">
           <Redirect to="/en" />
         </Route>
       </Switch>
-      <Footer />
     </Router>
   )
 }
