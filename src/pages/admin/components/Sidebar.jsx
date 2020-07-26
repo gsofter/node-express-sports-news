@@ -10,6 +10,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import RssFeedIcon from '@material-ui/icons/RssFeed'
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer'
 import PublicIcon from '@material-ui/icons/Public'
+import RoomIcon from '@material-ui/icons/Room'
 const drawerWidth = 240
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,6 +93,12 @@ const Sidebar = ({ open, handleDrawerClose }) => {
             <PublicIcon />
           </ListItemIcon>
           <ListItemText primary="Languages"></ListItemText>
+        </ListItem>
+        <ListItem button component={RouterLink} to="/admin/countries">
+          <ListItemIcon>
+            <RoomIcon />
+          </ListItemIcon>
+          <ListItemText primary="Countries"></ListItemText>
         </ListItem>
         <ListItem button component={RouterLink} to="/admin/teams">
           <ListItemIcon>

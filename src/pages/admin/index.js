@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar'
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
 import TeamFeed from './containers/TeamFeed'
 import Language from './containers/Language'
+import Country from './containers/Country'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,6 +62,9 @@ export default function Dashboard() {
               </Route>
               <Route path={`${match.path}/languages`}>
                 <Language />
+              </Route>
+              <Route path={`${match.path}/countries`}>
+                <Country />
               </Route>
             </Switch>
           </Grid>

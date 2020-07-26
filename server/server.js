@@ -2,6 +2,7 @@ require('dotenv').config()
 const cors = require('cors')
 const express = require('express')
 const path = require('path')
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const config = require('../config')
 const app = express()
@@ -33,6 +34,8 @@ function listen() {
     origin: whitelist,
   }
   app.use(cors(corsOptions))
+  app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(bodyParser.json())
   app.use('/api', router)
   app.use(express.static('./build/'))
   app.get('*', function (req, res) {

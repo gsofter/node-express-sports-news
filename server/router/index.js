@@ -76,4 +76,70 @@ router.get('/feeds/team', async (req, res) => {
   const teamFeeds = await TeamFeed.find({})
   res.send(teamFeeds)
 })
+
+router.post('/lang/new', async (req, res, next) => {
+  const newData = req.body
+  const newLanguage = new Language(newData)
+  try {
+    await newLanguage.save()
+    res.send(newLanguage)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+router.post('/lang/update', async (req, res, next) => {
+  const { langId, newData } = req.body
+  try {
+    const updated = await Language.findByIdAndUpdate(langId, newData)
+    res.send(updated)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+router.delete('/lang/:id', async (req, res, next) => {
+  try {
+    const removed = await Language.findByIdAndDelete(req.params.id)
+    if (!removed) res.status(404).send('No item found')
+    res.status(200).send()
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+router.post('/country', async (req, res, next) => {
+  const newData = req.body
+  console.log('newData', newData)
+  const newCountry = new Team(newData)
+  try {
+    await newCountry.save()
+    res.send(newCountry)
+  } catch (err) {
+    console.log('err', err)
+    res.status(500).send(err)
+  }
+})
+
+router.patch('/country/:id', async (req, res, next) => {
+  const countryId = req.params.id
+  const updateData = req.body
+  try {
+    const updated = await Team.findByIdAndUpdate(countryId, updateData)
+    res.send(updated)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+router.delete('/country/:id', async (req, res, next) => {
+  try {
+    const removed = await Team.findByIdAndDelete(req.params.id)
+    if (!removed) res.status(404).send('No item found')
+    res.status(200).send()
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
 module.exports = router

@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MaterialTable from 'material-table'
 import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core'
 import { tableIcons } from '../icons'
-export default function Feed({ languages }) {
-  const { useState } = React
 
+export default function Language({
+  languages,
+  addNewLanguage,
+  updateLanguage,
+  removeLanguage,
+}) {
   const [columns, setColumns] = useState([
     { title: 'Code', field: 'code' },
     { title: 'Name', field: 'name' },
@@ -41,23 +45,15 @@ export default function Feed({ languages }) {
           editable={{
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  resolve()
-                }, 1000)
+                addNewLanguage(newData, resolve, reject)
               }),
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  const index = oldData.tableData.id
-
-                  resolve()
-                }, 1000)
+                updateLanguage(oldData._id, newData, resolve, reject)
               }),
             onRowDelete: (oldData) =>
               new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  const index = oldData.tableData.id
-                }, 1000)
+                removeLanguage(oldData._id, resolve, reject)
               }),
           }}
         />

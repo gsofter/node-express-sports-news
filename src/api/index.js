@@ -37,3 +37,27 @@ export const getLangFeeds = async () => {
 export const getTeamFeeds = async () => {
   return await axios.get(`${API_ENDPOINT}/feeds/team`)
 }
+
+export const addNewLanguage = async (newData) => {
+  return await axios.post(`${API_ENDPOINT}/lang/new`, newData)
+}
+
+export const updateLanguage = async (langId, newData) => {
+  return await axios.post(`${API_ENDPOINT}/lang/update`, { langId, newData })
+}
+
+export const removeLanguage = async (langId) => {
+  return await axios.delete(`${API_ENDPOINT}/lang/${langId}`)
+}
+
+export const addNewCountry = async (newData) => {
+  return await axios.post(`${API_ENDPOINT}/country`, newData)
+}
+
+export const updateCountry = async (countryId, newData) => {
+  return await axios.patch(`${API_ENDPOINT}/country/${countryId}`, newData)
+}
+
+export const removeCountry = async (countryId) => {
+  return await axios.delete(`${API_ENDPOINT}/country/${countryId}`)
+}

@@ -3,8 +3,14 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const TeamSchema = new Schema({
-  language: { type: String, default: 'en', maxlength: 400 },
-  country: { type: String, default: 'en', maxlength: 400 },
+  country: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  language: {
+    type: String,
+  },
   teams: [
     {
       name: { type: String, default: '', maxlength: 400 },
