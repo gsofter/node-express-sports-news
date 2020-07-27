@@ -20,6 +20,8 @@ const TeamSchema = new Schema({
       intro_text: { type: String },
       footer_text: { type: String },
       ad_text: { type: String },
+      spon_text: { type: String },
+      spon_link: { type: String },
     },
   ],
 })
@@ -35,7 +37,11 @@ TeamSchema.methods = {
       footer_text: team.footer_text,
       ad_text: team.ad_text,
     })
+
+    return this.save()
   },
+
+  updateTeam: function (teamId, team) {},
 }
 
 mongoose.model('team', TeamSchema)

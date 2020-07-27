@@ -72,9 +72,78 @@ router.get('/feeds/lang', async (req, res) => {
   const langFeeds = await LangFeed.find({})
   res.send(langFeeds)
 })
+
+router.post('/feeds/lang', async (req, res, next) => {
+  const newData = req.body
+  const newLangFeed = new LangFeed(newData)
+  try {
+    await newLangFeed.save()
+    res.send(newLangFeed)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+router.patch('/feeds/lang/:feedId', async (req, res, next) => {
+  const newData = req.body
+  try {
+    const removed = await LangFeed.findByIdAndUpdate(req.params.feedId, newData)
+    if (!removed) res.status(404).send('No item found')
+    res.status(200).send()
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+router.delete('/feeds/lang/:feedId', async (req, res, next) => {
+  try {
+    const removed = await LangFeed.findByIdAndDelete(req.params.feedId)
+    if (!removed) res.status(404).send('No item found')
+    res.status(200).send()
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
 router.get('/feeds/team', async (req, res) => {
   const teamFeeds = await TeamFeed.find({})
   res.send(teamFeeds)
+})
+
+router.post('/feeds/team', async (req, res, next) => {
+  const newData = req.body
+  const newTeamFeed = new TeamFeed(newData)
+  try {
+    await newTeamFeed.save()
+    res.send(newTeamFeed)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+router.patch('/feeds/team/:feedId', async (req, res, next) => {
+  const newData = req.body
+  try {
+    const removed = await TeamFeed.findByIdAndUpdate(req.params.feedId, newData)
+    if (!removed) res.status(404).send('No item found')
+    res.status(200).send()
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+router.delete('/feeds/team/:feedId', async (req, res, next) => {
+  try {
+    const removed = await TeamFeed.findByIdAndDelete(req.params.feedId)
+    if (!removed) res.status(404).send('No item found')
+    res.status(200).send()
+  } catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
 })
 
 router.post('/lang/new', async (req, res, next) => {
@@ -110,7 +179,6 @@ router.delete('/lang/:id', async (req, res, next) => {
 
 router.post('/country', async (req, res, next) => {
   const newData = req.body
-  console.log('newData', newData)
   const newCountry = new Team(newData)
   try {
     await newCountry.save()
@@ -138,6 +206,68 @@ router.delete('/country/:id', async (req, res, next) => {
     if (!removed) res.status(404).send('No item found')
     res.status(200).send()
   } catch (err) {
+    console.log(err)
+    res.status(500).send(err)
+  }
+})
+
+router.post('/team/:country', async (req, res, next) => {
+  const country = req.params.country
+  const newData = req.body
+
+  try {
+    const targetCountry = await Team.findOne({ country })
+    if (!targetCountry) throw new Error()
+    targetCountry.teams.push(newData)
+    targetCountry
+      .save()
+      .then((updated) => res.send(updated))
+      .catch((err) => console.log(err))
+  } catch (err) {
+    console.log('err', err)
+    res.status(500).send(err)
+  }
+})
+
+router.patch('/team/:teamId', async (req, res, next) => {
+  const teamId = req.params.teamId
+  const newData = req.body
+  try {
+    const targetCountry = await Team.findOne({ 'teams._id': teamId })
+    const targetTeamIndex = targetCountry.teams.findIndex(
+      // eslint-disable-next-line eqeqeq
+      (team) => team._id == teamId,
+    )
+    targetCountry.teams[targetTeamIndex] = newData
+    targetCountry
+      .save()
+      .then((updated) => res.send(updated))
+      .catch((err) => {
+        console.log('err', err)
+      })
+  } catch (err) {
+    console.log('err', err)
+    res.status(500).send(err)
+  }
+})
+
+router.delete('/team/:teamId', async (req, res, next) => {
+  try {
+    const { teamId } = req.params
+    const targetCountry = await Team.findOne({ 'teams._id': teamId })
+    console.log('targetCountry.teams', teamId)
+    // eslint-disable-next-line eqeqeq
+    const filterTeams = targetCountry.teams.filter((team) => team._id != teamId)
+    console.log('filterTeams', filterTeams)
+    targetCountry.teams = [...filterTeams]
+    targetCountry
+      .save()
+      .then((updated) => res.send(updated))
+      .catch((err) => {
+        console.log('err', err)
+      })
+  } catch (err) {
+    console.log(err)
     res.status(500).send(err)
   }
 })

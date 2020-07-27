@@ -9,16 +9,17 @@ import { createStore, applyMiddleware } from 'redux'
 import Reducer from './redux/reducer'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { SnackbarProvider } from 'notistack'
 const store = createStore(Reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <FantalkTheme>
+  <Provider store={store}>
+    <FantalkTheme>
+      <SnackbarProvider>
         <App />
-      </FantalkTheme>
-    </Provider>
-  </React.StrictMode>,
+      </SnackbarProvider>
+    </FantalkTheme>
+  </Provider>,
   document.getElementById('root'),
 )
 

@@ -7,9 +7,10 @@ import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
 import TeamFeed from './containers/TeamFeed'
+import LangFeed from './containers/LangFeed'
 import Language from './containers/Language'
 import Country from './containers/Country'
-
+import Team from './containers/Team'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -60,11 +61,17 @@ export default function Dashboard() {
               <Route path={`${match.path}/feeds/team`}>
                 <TeamFeed />
               </Route>
+              <Route path={`${match.path}/feeds/lang`}>
+                <LangFeed />
+              </Route>
               <Route path={`${match.path}/languages`}>
                 <Language />
               </Route>
               <Route path={`${match.path}/countries`}>
                 <Country />
+              </Route>
+              <Route path={`${match.path}/teams`}>
+                <Team />
               </Route>
             </Switch>
           </Grid>

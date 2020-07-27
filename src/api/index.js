@@ -34,8 +34,33 @@ export const getSearchArticles = async (languageCode, searchText) => {
 export const getLangFeeds = async () => {
   return await axios.get(`${API_ENDPOINT}/feeds/lang`)
 }
+
+export const addLangFeed = async (newData) => {
+  return await axios.post(`${API_ENDPOINT}/feeds/lang`, newData)
+}
+
+export const updateLangFeed = async (feedId, newData) => {
+  return await axios.patch(`${API_ENDPOINT}/feeds/lang/${feedId}`, newData)
+}
+
+export const removeLangFeed = async (feedId) => {
+  return await axios.delete(`${API_ENDPOINT}/feeds/lang/${feedId}`)
+}
+
 export const getTeamFeeds = async () => {
   return await axios.get(`${API_ENDPOINT}/feeds/team`)
+}
+
+export const addTeamFeed = async (newData) => {
+  return await axios.post(`${API_ENDPOINT}/feeds/team`, newData)
+}
+
+export const updateTeamFeed = async (feedId, newData) => {
+  return await axios.patch(`${API_ENDPOINT}/feeds/team/${feedId}`, newData)
+}
+
+export const removeTeamFeed = async (feedId) => {
+  return await axios.delete(`${API_ENDPOINT}/feeds/team/${feedId}`)
 }
 
 export const addNewLanguage = async (newData) => {
@@ -60,4 +85,16 @@ export const updateCountry = async (countryId, newData) => {
 
 export const removeCountry = async (countryId) => {
   return await axios.delete(`${API_ENDPOINT}/country/${countryId}`)
+}
+
+export const addTeam = async (country, newData) => {
+  return await axios.post(`${API_ENDPOINT}/team/${country}`, newData)
+}
+
+export const updateTeam = async (teamId, newData) => {
+  return await axios.patch(`${API_ENDPOINT}/team/${teamId}`, newData)
+}
+
+export const removeTeam = async (teamId) => {
+  return await axios.delete(`${API_ENDPOINT}/team/${teamId}`)
 }

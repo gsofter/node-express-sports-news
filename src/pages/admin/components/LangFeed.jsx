@@ -1,29 +1,20 @@
 import React, { useState } from 'react'
 import MaterialTable from 'material-table'
-import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core'
 import { tableIcons } from '../icons'
-
-export default function Language({
-  languages,
-  addNewLanguage,
-  updateLanguage,
-  removeLanguage,
+export default function LangFeed({
+  langFeeds,
+  addFeed,
+  updateFeed,
+  removeFeed,
 }) {
   const [columns, setColumns] = useState([
-    { title: 'Code', field: 'code' },
-    { title: 'Name', field: 'name' },
+    { title: 'Feed Name', field: 'feed_name' },
+    { title: 'Feed URL', field: 'feed_url', type: 'url' },
+    { title: 'Language', field: 'language' },
   ])
 
   const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#4caf50',
-      },
-      secondary: {
-        main: '#ff9100',
-      },
-    },
-
     typography: {
       fontFamily: 'Roboto',
     },
@@ -34,9 +25,9 @@ export default function Language({
       <div style={{ width: '100%' }}>
         <MaterialTable
           icons={tableIcons}
-          title="Languages"
+          title="Language Feed"
           columns={columns}
-          data={languages}
+          data={langFeeds}
           options={{
             rowStyle: {
               fontFamily: 'Roboto',
@@ -45,15 +36,15 @@ export default function Language({
           editable={{
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {
-                addNewLanguage(newData, resolve, reject)
+                addFeed(newData, resolve, reject)
               }),
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
-                updateLanguage(oldData._id, newData, resolve, reject)
+                updateFeed(oldData._id, newData, resolve, reject)
               }),
             onRowDelete: (oldData) =>
               new Promise((resolve, reject) => {
-                removeLanguage(oldData._id, resolve, reject)
+                removeFeed(oldData._id, resolve, reject)
               }),
           }}
         />

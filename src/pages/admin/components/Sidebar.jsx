@@ -1,16 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import {
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+} from '@material-ui/core'
 import { Link as RouterLink } from 'react-router-dom'
 import RssFeedIcon from '@material-ui/icons/RssFeed'
 import SportsSoccerIcon from '@material-ui/icons/SportsSoccer'
 import PublicIcon from '@material-ui/icons/Public'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import FlagIcon from '@material-ui/icons/Flag'
 import RoomIcon from '@material-ui/icons/Room'
+import { useSelector } from 'react-redux'
 const drawerWidth = 240
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,6 +71,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Sidebar = ({ open, handleDrawerClose }) => {
   const classes = useStyles()
+  const teams = useSelector((state) => state.teams)
+  const [expand, setExpand] = useState(false)
+  const handleExpand = () => {
+    setExpand(!expand)
+  }
   return (
     <Drawer
       variant="permanent"
@@ -100,12 +115,31 @@ const Sidebar = ({ open, handleDrawerClose }) => {
           </ListItemIcon>
           <ListItemText primary="Countries"></ListItemText>
         </ListItem>
-        <ListItem button component={RouterLink} to="/admin/teams">
+        <ListItem button onClick={handleExpand}>
           <ListItemIcon>
             <SportsSoccerIcon />
           </ListItemIcon>
           <ListItemText primary="Teams" />
+          {expand ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+        <Collapse in={expand} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {teams.map((country) => {
+              return (
+                <ListItem
+                  button
+                  component={RouterLink}
+                  to={`/admin/teams?country=${country.country}`}
+                >
+                  <ListItemIcon>
+                    <FlagIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={country.country} />
+                </ListItem>
+              )
+            })}
+          </List>
+        </Collapse>
       </List>
       <Divider />
     </Drawer>

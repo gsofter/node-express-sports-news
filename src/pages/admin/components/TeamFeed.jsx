@@ -1,28 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MaterialTable from 'material-table'
-import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core'
 import { tableIcons } from '../icons'
-export default function Feed({ langFeeds, teamFeeds }) {
-  const { useState } = React
-
-  const [columns, setColumns] = useState([
+export default function TeamFeed({
+  teamFeeds,
+  addFeed,
+  updateFeed,
+  removeFeed,
+}) {
+  const columns = [
     { title: 'Feed Name', field: 'feed_name' },
     { title: 'Feed URL', field: 'feed_url', type: 'url' },
     { title: 'Language', field: 'language' },
     { title: 'Country', field: 'country' },
     { title: 'Team', field: 'team_name' },
-  ])
+  ]
 
   const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#4caf50',
-      },
-      secondary: {
-        main: '#ff9100',
-      },
-    },
-
     typography: {
       fontFamily: 'Roboto',
     },
@@ -33,7 +27,7 @@ export default function Feed({ langFeeds, teamFeeds }) {
       <div style={{ width: '100%' }}>
         <MaterialTable
           icons={tableIcons}
-          title="Editable Preview"
+          title="Team Feeds"
           columns={columns}
           data={teamFeeds}
           options={{
@@ -44,23 +38,15 @@ export default function Feed({ langFeeds, teamFeeds }) {
           editable={{
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  resolve()
-                }, 1000)
+                addFeed(newData, resolve, reject)
               }),
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  const index = oldData.tableData.id
-
-                  resolve()
-                }, 1000)
+                updateFeed(oldData._id, newData, resolve, reject)
               }),
             onRowDelete: (oldData) =>
               new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  const index = oldData.tableData.id
-                }, 1000)
+                removeFeed(oldData._id, resolve, reject)
               }),
           }}
         />

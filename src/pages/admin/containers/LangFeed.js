@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useCallback } from 'react'
-import { useSnackbar } from 'notistack'
-import TeamFeedComponent from '../components/TeamFeed'
+import LangFeedComponent from '../components/LangFeed'
 import * as api from '../../../api'
-const TeamFeed = () => {
-  const [teamFeeds, setTeamFeeds] = useState([])
+import { useSnackbar } from 'notistack'
+const LangFeed = () => {
+  const [langFeeds, setLangFeeds] = useState([])
   const [loading, setLoading] = useState(true)
   const { enqueueSnackbar } = useSnackbar()
   const fetchData = useCallback(async () => {
-    const response = await api.getTeamFeeds()
-    setTeamFeeds(response.data)
+    const response = await api.getLangFeeds()
+    setLangFeeds(response.data)
     setLoading(false)
   })
+
   useEffect(() => {
     fetchData()
   }, [])
@@ -19,7 +20,7 @@ const TeamFeed = () => {
   const addFeed = (newData, resolve, reject) => {
     const func = async () => {
       try {
-        await api.addTeamFeed(newData)
+        await api.addLangFeed(newData)
         fetchData()
         enqueueSnackbar('Successfully added', {
           variant: 'success',
@@ -46,7 +47,7 @@ const TeamFeed = () => {
   const updateFeed = (feedId, newData, resolve, reject) => {
     const func = async () => {
       try {
-        await api.updateTeamFeed(feedId, newData)
+        await api.updateLangFeed(feedId, newData)
         fetchData()
         enqueueSnackbar('Successfully updated', {
           variant: 'success',
@@ -69,11 +70,10 @@ const TeamFeed = () => {
     }
     func()
   }
-
   const removeFeed = (feedId, resolve, reject) => {
     const func = async () => {
       try {
-        await api.removeTeamFeed(feedId)
+        await api.removeLangFeed(feedId)
         fetchData()
         enqueueSnackbar('Successfully removed', {
           variant: 'success',
@@ -98,14 +98,14 @@ const TeamFeed = () => {
   }
 
   return (
-    <TeamFeedComponent
+    <LangFeedComponent
       loading={loading}
-      teamFeeds={teamFeeds}
+      langFeeds={langFeeds}
       addFeed={addFeed}
-      updateFeed={updateFeed}
       removeFeed={removeFeed}
+      updateFeed={updateFeed}
     />
   )
 }
 
-export default TeamFeed
+export default LangFeed

@@ -1,19 +1,29 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import CountryComponent from '../components/Country'
+import React, { useEffect, useState, useCallback } from 'react'
+import TeamComponent from '../components/Team'
+import queryString from 'query-string'
 import * as api from '../../../api'
-import { loadTeams } from '../../../redux/actions'
 import { useSnackbar } from 'notistack'
-const Country = () => {
-  const countries = useSelector((state) => state.teams)
-  const languages = useSelector((state) => state.languages)
-  const dispatch = useDispatch()
+const Team = () => {
+  const [teams, setTeams] = useState([])
+  const [loading, setLoading] = useState(false)
+  const { country } = queryString.parse(window.location.search)
   const { enqueueSnackbar } = useSnackbar()
+  const fetchData = useCallback(async () => {
+    const response = await api.getTeams()
+    const countryItem = response.data.find((team) => team.country === country)
+    setTeams(countryItem.teams)
+    setLoading(false)
+  }, [country])
+
+  useEffect(() => {
+    setLoading(true)
+    fetchData()
+  }, [country, fetchData])
+
   const handleSubmit = async (data, newData) => {
     if (data._id) {
       try {
-        await api.updateCountry(data._id, newData)
+        await api.updateTeam(data._id, newData)
         enqueueSnackbar('Successfully updated', {
           variant: 'success',
           anchorOrigin: {
@@ -21,7 +31,7 @@ const Country = () => {
             horizontal: 'right',
           },
         })
-        dispatch(loadTeams())
+        fetchData()
       } catch (err) {
         enqueueSnackbar('Update Error', {
           variant: 'error',
@@ -30,10 +40,11 @@ const Country = () => {
             horizontal: 'right',
           },
         })
+        console.log(err)
       }
     } else {
       try {
-        await api.addNewCountry(newData)
+        await api.addTeam(country, newData)
         enqueueSnackbar('Successfully added', {
           variant: 'success',
           anchorOrigin: {
@@ -41,7 +52,7 @@ const Country = () => {
             horizontal: 'right',
           },
         })
-        dispatch(loadTeams())
+        fetchData()
       } catch (err) {
         enqueueSnackbar('Add Error', {
           variant: 'error',
@@ -57,17 +68,17 @@ const Country = () => {
 
   const handleRemove = async (data) => {
     try {
-      await api.removeCountry(data._id)
-      enqueueSnackbar('Successfully removed', {
+      await api.removeTeam(data._id)
+      enqueueSnackbar('Successfully added', {
         variant: 'success',
         anchorOrigin: {
           vertical: 'top',
           horizontal: 'right',
         },
       })
-      dispatch(loadTeams())
+      fetchData()
     } catch (err) {
-      enqueueSnackbar('Remove error', {
+      enqueueSnackbar('Remove Error', {
         variant: 'error',
         anchorOrigin: {
           vertical: 'top',
@@ -79,13 +90,14 @@ const Country = () => {
   }
 
   return (
-    <CountryComponent
-      countries={countries}
-      languages={languages}
+    <TeamComponent
+      teams={teams}
+      loading={loading}
       handleSubmit={handleSubmit}
       handleRemove={handleRemove}
+      country={country}
     />
   )
 }
 
-export default Country
+export default Team
