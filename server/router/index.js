@@ -22,7 +22,7 @@ router.get('/teams', async (req, res, next) => {
 })
 
 router.get('/languages', async (req, res, next) => {
-  const languages = await Language.find({}).select('code name')
+  const languages = await Language.find({})
   res.send(languages)
 })
 

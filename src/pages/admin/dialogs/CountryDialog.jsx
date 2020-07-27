@@ -27,15 +27,18 @@ const useStyles = makeStyles((theme) => ({
 }))
 const Country = ({ open, onClose, languages, isEdit, data, handleSubmit }) => {
   const classes = useStyles()
-  const [form, setForm] = useState({
-    country: data._id ? data.country : '',
-    language: data._id ? data.language : '',
-  })
+  const [form, setForm] = useState({})
 
   useEffect(() => {
     setForm({
-      country: data._id ? data.country : '',
-      language: data._id ? data.language : '',
+      country: data.country || '',
+      language: data.language || '',
+      meta_title: data.meta_title || '',
+      meta_description: data.meta_description || '',
+      intro_text: data.intro_text || '',
+      footer_text: data.footer_text || '',
+      spon_text: data.spon_text || '',
+      spon_link: data.spon_link || '',
     })
   }, [data])
 
@@ -65,6 +68,7 @@ const Country = ({ open, onClose, languages, isEdit, data, handleSubmit }) => {
               <TextField
                 label="Country"
                 fullWidth
+                variant="outlined"
                 required
                 onChange={handleChange}
                 value={form.country}
@@ -77,6 +81,7 @@ const Country = ({ open, onClose, languages, isEdit, data, handleSubmit }) => {
                 label="Language"
                 fullWidth
                 required
+                variant="outlined"
                 name="language"
                 onChange={handleChange}
                 value={form.language}
@@ -87,6 +92,70 @@ const Country = ({ open, onClose, languages, isEdit, data, handleSubmit }) => {
                   </MenuItem>
                 ))}
               </TextField>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                label="Meta Title"
+                fullWidth
+                variant="outlined"
+                onChange={handleChange}
+                value={form.meta_title}
+                name="meta_title"
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                label="Meta Description"
+                fullWidth
+                variant="outlined"
+                onChange={handleChange}
+                value={form.meta_description}
+                name="meta_description"
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                label="Intro Text"
+                fullWidth
+                variant="outlined"
+                multiline
+                rows={4}
+                onChange={handleChange}
+                value={form.intro_text}
+                name="intro_text"
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                label="Footer Text"
+                fullWidth
+                variant="outlined"
+                multiline
+                rows={4}
+                onChange={handleChange}
+                value={form.footer_text}
+                name="footer_text"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Sponser Text"
+                fullWidth
+                variant="outlined"
+                onChange={handleChange}
+                value={form.spon_text}
+                name="spon_text"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                label="Sponser Link"
+                fullWidth
+                variant="outlined"
+                onChange={handleChange}
+                value={form.spon_link}
+                name="spon_link"
+              />
             </Grid>
           </Grid>
         </DialogContent>

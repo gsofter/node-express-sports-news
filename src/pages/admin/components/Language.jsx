@@ -12,6 +12,12 @@ export default function Language({
   const [columns, setColumns] = useState([
     { title: 'Code', field: 'code' },
     { title: 'Name', field: 'name' },
+    { title: 'Meta Title', field: 'meta_title' },
+    { title: 'Meta Description', field: 'meta_description' },
+    { title: 'Intro Text', field: 'intro_text' },
+    { title: 'Footer Text', field: 'footer_text' },
+    { title: 'Sponsor Text', field: 'spon_text' },
+    { title: 'Sponser Link', field: 'spon_link' },
   ])
 
   const theme = createMuiTheme({

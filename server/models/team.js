@@ -11,6 +11,12 @@ const TeamSchema = new Schema({
   language: {
     type: String,
   },
+  meta_title: String,
+  meta_description: String,
+  intro_text: String,
+  footer_text: String,
+  spon_text: String,
+  spon_link: String,
   teams: [
     {
       name: { type: String, default: '', maxlength: 400 },
