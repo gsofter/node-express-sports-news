@@ -45,6 +45,9 @@ const TeamPage = ({ team, articles, loading, fail }) => {
     <Container className={classes.root}>
       <div className={classes.teamHeader}>{}</div>
       <div className={classes.page}>
+        {team.icon ? (
+          <img src={team.icon} alt="team icon" width="100px" height="100px" />
+        ) : null}
         <PageTitle variant="h1"> {team.name} FOOTBALL NEWS </PageTitle>
         <PageTitle variant="body1">
           {team.intro_text}

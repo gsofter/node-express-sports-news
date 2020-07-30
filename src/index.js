@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker'
 import FantalkTheme from './config/theme'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
+import { BrowserRouter as Router } from 'react-router-dom'
 import Reducer from './redux/reducer'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -16,7 +17,9 @@ ReactDOM.render(
   <Provider store={store}>
     <FantalkTheme>
       <SnackbarProvider>
-        <App />
+        <Router>
+          <App />
+        </Router>
       </SnackbarProvider>
     </FantalkTheme>
   </Provider>,

@@ -9,7 +9,6 @@ const Banner = () => {
   const { enqueueSnackbar } = useSnackbar()
   const fetchData = useCallback(async () => {
     const response = await api.getBanners()
-    console.log('response.data', response.data)
     setBanners(response.data)
     setLoading(false)
   }, [])

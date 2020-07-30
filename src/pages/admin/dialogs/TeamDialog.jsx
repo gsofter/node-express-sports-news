@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useDropzone } from 'react-dropzone'
 import {
   Dialog,
   DialogTitle,
@@ -25,10 +26,46 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
     marginLeft: 'auto',
   },
+  imagePreview: {
+    width: '100px',
+    height: '100px',
+    border: '1px solid #ccc',
+    '& img': {
+      width: 'inherit',
+    },
+  },
+  placeholder: {
+    width: '100px',
+    height: '100px',
+    border: '1px solid #ccc',
+  },
 }))
 const TeamDialog = ({ open, onClose, data, handleSubmit }) => {
   const classes = useStyles()
   const [form, setForm] = useState({})
+  const [iconPreview, setIconPreview] = useState('')
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: 'image/*',
+    multiple: false,
+    onDrop: async (acceptedFiles) => {
+      const files = acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        }),
+      )
+      try {
+        const uploadResponse = await api.uploadIcon(files[0])
+        const filePath = uploadResponse.data
+        setIconPreview(filePath)
+        setForm({
+          ...form,
+          icon: filePath,
+        })
+      } catch (err) {
+        console.log('err', err)
+      }
+    },
+  })
 
   useEffect(() => {
     setForm({
@@ -39,6 +76,7 @@ const TeamDialog = ({ open, onClose, data, handleSubmit }) => {
       footer_text: data.footer_text || '',
       spon_text: data.spon_text || '',
       spon_link: data.spon_link || '',
+      icon: data.icon || '',
     })
   }, [data])
 
@@ -75,7 +113,21 @@ const TeamDialog = ({ open, onClose, data, handleSubmit }) => {
                 name="name"
               />
             </Grid>
-            <Grid item xs={12} sm={6}></Grid>
+            <Grid item xs={12} sm={3}>
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                {isDragActive ? <p> Select Icon ...</p> : <p> Select Icon</p>}
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              {iconPreview ? (
+                <div className={classes.imagePreview}>
+                  <img src={iconPreview} alt="icon preview" />
+                </div>
+              ) : (
+                <div className={classes.placeholder}></div>
+              )}
+            </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 label="Meta Title"

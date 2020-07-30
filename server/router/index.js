@@ -1,6 +1,30 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
+const multer = require('multer')
+const path = require('path')
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads')
+  },
+  filename: (req, file, cb) => {
+    console.log(file)
+    cb(null, Date.now() + path.extname(file.originalname))
+  },
+})
+
+const fileFilter = (req, file, cb) => {
+  // eslint-disable-next-line eqeqeq
+  if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/png') {
+    cb(null, true)
+  } else {
+    cb(null, false)
+  }
+}
+
+const upload = multer({ storage: storage, fileFilter: fileFilter })
+
 require('../models/feed')
 require('../models/team')
 require('../models/article')
@@ -295,6 +319,17 @@ router.post('/banner', async (req, res) => {
     }
     res.send('success')
   } catch (err) {}
+})
+
+router.post('/upload', upload.single('icon'), async (req, res) => {
+  if (!req.file) {
+    res.status(500).send('error')
+  } else {
+    const host = req.headers.host
+    const filePath = req.protocol + '://' + host + '/' + req.file.path
+    console.log('filePath', filePath)
+    res.send(filePath)
+  }
 })
 
 module.exports = router

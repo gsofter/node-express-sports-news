@@ -37,6 +37,7 @@ function listen() {
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
   app.use('/api', router)
+  app.use('/uploads', express.static('uploads'))
   app.use(express.static('./build/'))
   app.get('*', function (req, res) {
     res.sendFile(path.resolve('build', 'index.html'))

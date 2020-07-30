@@ -21,7 +21,6 @@ const Banner = ({ banners, updateBanners }) => {
       ...tempBanners[index],
       [type]: event.target.value,
     }
-    console.log('tempBanners', tempBanners)
     setForm(tempBanners)
   }
 

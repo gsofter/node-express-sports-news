@@ -109,3 +109,14 @@ export const updateBanners = async (newData) => {
 export const removeBanner = async (newData) => {
   return await axios.post(`${API_ENDPOINT}/banner`, newData)
 }
+
+export const uploadIcon = async (file) => {
+  const formData = new FormData()
+  formData.append('icon', file)
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data',
+    },
+  }
+  return await axios.post(`${API_ENDPOINT}/upload`, formData, config)
+}
