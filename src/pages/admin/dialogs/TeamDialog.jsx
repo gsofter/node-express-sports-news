@@ -137,8 +137,8 @@ const TeamDialog = ({ open, onClose, data, handleSubmit }) => {
                 fullWidth
                 variant="outlined"
                 onChange={handleChange}
-                value={form.spon_url}
-                name="spon_url"
+                value={form.spon_link}
+                name="spon_link"
               />
             </Grid>
           </Grid>

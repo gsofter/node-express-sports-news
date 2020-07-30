@@ -11,6 +11,7 @@ import LangFeed from './containers/LangFeed'
 import Language from './containers/Language'
 import Country from './containers/Country'
 import Team from './containers/Team'
+import Banner from './containers/Banner'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -72,6 +73,9 @@ export default function Dashboard() {
               </Route>
               <Route path={`${match.path}/teams`}>
                 <Team />
+              </Route>
+              <Route path={`${match.path}/banner`}>
+                <Banner />
               </Route>
             </Switch>
           </Grid>

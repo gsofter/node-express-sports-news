@@ -98,3 +98,14 @@ export const updateTeam = async (teamId, newData) => {
 export const removeTeam = async (teamId) => {
   return await axios.delete(`${API_ENDPOINT}/team/${teamId}`)
 }
+
+export const getBanners = async () => {
+  return await axios.get(`${API_ENDPOINT}/banner`)
+}
+
+export const updateBanners = async (newData) => {
+  return await axios.post(`${API_ENDPOINT}/banner`, newData)
+}
+export const removeBanner = async (newData) => {
+  return await axios.post(`${API_ENDPOINT}/banner`, newData)
+}

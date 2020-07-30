@@ -12,7 +12,7 @@ import Sidebar from './containers/Sidebar'
 import Searchbar from './containers/Searchbar'
 import Homepage from './pages/HomePage'
 import { useDispatch } from 'react-redux'
-import { loadTeams, loadLanguages } from './redux/actions'
+import { loadTeams, loadLanguages, loadBanners } from './redux/actions'
 import CountryPage from './pages/CountryPage'
 import TeamPage from './pages/TeamPage'
 import AboutusPage from './components/AboutusPage'
@@ -43,6 +43,7 @@ export default function App() {
   useEffect(() => {
     dispatch(loadTeams())
     dispatch(loadLanguages())
+    dispatch(loadBanners())
   }, [dispatch])
 
   return (

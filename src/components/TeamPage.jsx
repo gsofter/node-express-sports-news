@@ -47,11 +47,16 @@ const TeamPage = ({ team, articles, loading, fail }) => {
       <div className={classes.page}>
         <PageTitle variant="h1"> {team.name} FOOTBALL NEWS </PageTitle>
         <PageTitle variant="body1">
-          Welcome Team Page
+          {team.intro_text}
           <a href="#"> Read More </a>
         </PageTitle>
       </div>
-      <Articles articles={articles} />
+      <Articles
+        articles={articles}
+        sponText={team.spon_text}
+        sponLink={team.spon_link}
+      />
+      <PageTitle variant="body1">{team.footer_text}</PageTitle>
     </Container>
   )
 }

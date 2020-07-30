@@ -20,6 +20,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import FlagIcon from '@material-ui/icons/Flag'
 import RoomIcon from '@material-ui/icons/Room'
+import NewReleasesIcon from '@material-ui/icons/NewReleases'
 import { useSelector } from 'react-redux'
 const drawerWidth = 240
 const useStyles = makeStyles((theme) => ({
@@ -91,6 +92,12 @@ const Sidebar = ({ open, handleDrawerClose }) => {
       </div>
       <Divider />
       <List>
+        <ListItem button component={RouterLink} to="/admin/banner">
+          <ListItemIcon>
+            <NewReleasesIcon />
+          </ListItemIcon>
+          <ListItemText primary="Banner"></ListItemText>
+        </ListItem>
         <ListItem button component={RouterLink} to="/admin/feeds/team">
           <ListItemIcon>
             <RssFeedIcon />

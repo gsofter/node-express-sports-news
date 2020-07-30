@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid rgba(0, 0, 0, .1)',
   },
 }))
-const HomePage = ({ articles, loading, fail }) => {
+const HomePage = ({ articles, loading, fail, language }) => {
   const classes = useStyles()
   if (loading) return <h1> Loading... </h1>
   else if (fail) return <h1> Request Error </h1>
@@ -33,10 +33,15 @@ const HomePage = ({ articles, loading, fail }) => {
     <Container className={classes.root}>
       <PageTitle variant="h1"> FOOTBALL NEWS </PageTitle>
       <PageTitle variant="body1">
-        Welcome Language Wide Page
+        {language.intro_text}
         <a href="#"> Read More </a>
       </PageTitle>
-      <Articles articles={articles} />
+      <Articles
+        articles={articles}
+        sponText={language.spon_text}
+        sponLink={language.spon_link}
+      />
+      <PageTitle variant="body1">{language.footer_text}</PageTitle>
     </Container>
   )
 }

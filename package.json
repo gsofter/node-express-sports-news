@@ -25,6 +25,7 @@
     "cors": "^2.8.5",
     "crossenv": "0.0.2-security",
     "csv-parser": "^2.3.3",
+    "deepcopy": "^2.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "feedparser": "^2.2.10",

@@ -5,12 +5,14 @@ require('../models/feed')
 require('../models/team')
 require('../models/article')
 require('../models/language')
+require('../models/banner')
 
 const Team = mongoose.model('team')
 const Language = mongoose.model('language')
 const Article = mongoose.model('article')
 const LangFeed = mongoose.model('langfeed')
 const TeamFeed = mongoose.model('teamfeed')
+const Banner = mongoose.model('banner')
 
 router.get('/test', async (req, res, next) => {
   res.send('testing')
@@ -270,6 +272,29 @@ router.delete('/team/:teamId', async (req, res, next) => {
     console.log(err)
     res.status(500).send(err)
   }
+})
+
+router.get('/banner', async (req, res) => {
+  try {
+    const banners = await Banner.find({})
+    res.send(banners)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+router.post('/banner', async (req, res) => {
+  const newBanners = req.body
+  try {
+    const removeCount = await Banner.remove({})
+    console.log('removeCount', removeCount)
+    for (const banner of newBanners) {
+      const newBanner = new Banner(banner)
+      await newBanner.save()
+      console.log('newBanner ====>', newBanner)
+    }
+    res.send('success')
+  } catch (err) {}
 })
 
 module.exports = router

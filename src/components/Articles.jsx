@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react'
 import { makeStyles, withStyles, Typography, Button } from '@material-ui/core'
 import moment from 'moment'
+import { useSelector } from 'react-redux'
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(5),
@@ -52,26 +53,32 @@ const useStyles = makeStyles((theme) => ({
       color: '#77c38b',
     },
   },
-  banner: {},
+  banner_desktop: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
+  banner_mobile: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
 }))
 
-const BannerAds = () => {
+const BannerAds = ({ banner }) => {
   const classes = useStyles()
-  const html = `<div id="320441640">
-  <script type="text/javascript">
-      try {
-          window._mNHandle.queue.push(function (){
-              window._mNDetails.loadTag("320441640", "300x250", "320441640");
-          });
-      }
-      catch (error) {}
-  </script>
-</div>`
+
   return (
-    <div
-      className={classes.banner}
-      dangerouslySetInnerHTML={{ __html: html }}
-    ></div>
+    <>
+      <div
+        className={classes.banner_desktop}
+        dangerouslySetInnerHTML={{ __html: banner.desktop }}
+      ></div>
+      <div
+        className={classes.banner_mobile}
+        dangerouslySetInnerHTML={{ __html: banner.mobile }}
+      ></div>
+    </>
   )
 }
 
@@ -89,7 +96,8 @@ const LoadMoreButton = withStyles((theme) => ({
   },
 }))(Button)
 
-const Articles = ({ articles }) => {
+const Articles = ({ articles, sponText, sponLink }) => {
+  const banners = useSelector((state) => state.banners)
   const classes = useStyles()
   const [showCount, setShowCount] = useState(
     articles.length > 40 ? 40 : articles.length,
@@ -123,15 +131,11 @@ const Articles = ({ articles }) => {
                 {moment(article.pub_date).fromNow()} - {article.feed}
               </Typography>
             </div>
-            {index === 2 ? (
+            {index === 2 && sponText && sponLink ? (
               <div className={classes.article}>
                 <Typography variant="h5">
-                  <a
-                    href="https://www.unibet.eu/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Bet on AC Milan and get a free bet
+                  <a href={sponLink} target="_blank" rel="noopener noreferrer">
+                    {sponText}
                   </a>
                 </Typography>
                 <Typography variant="body1" className="sponsored">
@@ -139,8 +143,14 @@ const Articles = ({ articles }) => {
                 </Typography>
               </div>
             ) : null}
-            {index === 9 || index === 19 || index === 29 || index === 39 ? (
-              <BannerAds />
+            {index === 9 && banners && banners[0] ? (
+              <BannerAds banner={banners[0]} />
+            ) : null}
+            {index === 19 && banners && banners[0] ? (
+              <BannerAds banner={banners[1]} />
+            ) : null}
+            {index === 29 && banners && banners[0] ? (
+              <BannerAds banner={banners[2]} />
             ) : null}
           </>
         )

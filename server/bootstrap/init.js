@@ -2,8 +2,10 @@ const mongoose = require('mongoose')
 const { compose: feedUrls } = require('./feedUrls')
 require('../models/language')
 require('../models/team')
+require('../models/banner')
 const Team = mongoose.model('team')
 const Language = mongoose.model('language')
+const Banner = mongoose.model('banner')
 
 const teams = [
   {
@@ -40,6 +42,75 @@ const languages = [
   {
     code: 'it',
     name: 'Italy',
+  },
+]
+
+const banners = [
+  {
+    mobile: `<div id="320441640">
+    <script type="text/javascript">
+        try {
+            window._mNHandle.queue.push(function (){
+                window._mNDetails.loadTag("320441640", "300x250", "320441640");
+            });
+        }
+        catch (error) {}
+    </script>
+</div>`,
+    desktop: `<div id="320441640">
+    <script type="text/javascript">
+        try {
+            window._mNHandle.queue.push(function (){
+                window._mNDetails.loadTag("320441640", "300x250", "320441640");
+            });
+        }
+        catch (error) {}
+    </script>
+</div>`,
+  },
+  {
+    mobile: `<div id="320441640">
+    <script type="text/javascript">
+        try {
+            window._mNHandle.queue.push(function (){
+                window._mNDetails.loadTag("320441640", "300x250", "320441640");
+            });
+        }
+        catch (error) {}
+    </script>
+</div>`,
+    desktop: `<div id="320441640">
+    <script type="text/javascript">
+        try {
+            window._mNHandle.queue.push(function (){
+                window._mNDetails.loadTag("320441640", "300x250", "320441640");
+            });
+        }
+        catch (error) {}
+    </script>
+</div>`,
+  },
+  {
+    mobile: `<div id="320441640">
+    <script type="text/javascript">
+        try {
+            window._mNHandle.queue.push(function (){
+                window._mNDetails.loadTag("320441640", "300x250", "320441640");
+            });
+        }
+        catch (error) {}
+    </script>
+</div>`,
+    desktop: `<div id="320441640">
+    <script type="text/javascript">
+        try {
+            window._mNHandle.queue.push(function (){
+                window._mNDetails.loadTag("320441640", "300x250", "320441640");
+            });
+        }
+        catch (error) {}
+    </script>
+</div>`,
   },
 ]
 
@@ -80,6 +151,16 @@ const feedLanguages = async () => {
   }
 }
 
+const feedBanner = async () => {
+  const removeCount = await Banner.remove({})
+  console.log('removeCount', removeCount)
+  for (const banner of banners) {
+    const newBanner = new Banner(banner)
+    await newBanner.save()
+    console.log('newBanner ====>', newBanner)
+  }
+}
+
 function connect() {
   mongoose.connection
     .on('error', console.log)
@@ -89,6 +170,7 @@ function connect() {
       feedTeams()
       feedLanguages()
       feedUrls()
+      feedBanner()
       //Promise.all([feedTeams, feedLanguages]).then(process.exit)
     })
   return mongoose.connect('mongodb://localhost:27017/fantalk', {

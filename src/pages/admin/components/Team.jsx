@@ -14,7 +14,7 @@ export default function Team({ country, teams, handleSubmit, handleRemove }) {
     { title: 'Intro Text', field: 'intro_text' },
     { title: 'Footer Text', field: 'footer_text' },
     { title: 'Sponsor Text', field: 'spon_text' },
-    { title: 'Sponsor URL', field: 'spon_url' },
+    { title: 'Sponsor Link', field: 'spon_link' },
   ])
 
   const theme = createMuiTheme({

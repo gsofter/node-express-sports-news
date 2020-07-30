@@ -5,6 +5,7 @@ import * as actions from './actions'
 let initState = {
   teams: [],
   languages: [],
+  banners: [],
   myLanguage: 'en',
   myTeam: {},
 }
@@ -22,6 +23,13 @@ const reducer = handleActions(
       return {
         ...state,
         languages: languages,
+      }
+    },
+    [actions.INIT_BANNERS]: (state, action) => {
+      const banners = action.payload
+      return {
+        ...state,
+        banners: banners,
       }
     },
     [actions.SET_MY_LANGUAGE]: (state, action) => {
