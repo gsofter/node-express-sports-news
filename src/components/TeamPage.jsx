@@ -3,6 +3,8 @@ import React from 'react'
 import { makeStyles, Container } from '@material-ui/core'
 import Articles from './Articles'
 import PageTitle from './PageTitle'
+import Scroll from 'react-scroll'
+const scroll = Scroll.animateScroll
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
@@ -39,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 const TeamPage = ({ team, articles, loading, fail }) => {
   const classes = useStyles()
+  const onReadMore = () => {
+    scroll.scrollToBottom()
+  }
   if (loading) return <h1> Loading... </h1>
   else if (fail) return <h1> Request Error </h1>
   return (
@@ -46,19 +51,18 @@ const TeamPage = ({ team, articles, loading, fail }) => {
       <div className={classes.teamHeader}>{}</div>
       <div className={classes.page}>
         {team.icon ? (
-          <img src={team.icon} alt="team icon" width="100px" height="100px" />
+          <img src={team.icon} alt="team icon" width="50px" height="42px" />
         ) : null}
         <PageTitle variant="h1"> {team.name} FOOTBALL NEWS </PageTitle>
         <PageTitle variant="body1">
           {team.intro_text}
-          <a href="#"> Read More </a>
+          <a href="#" onClick={onReadMore}>
+            Read More
+          </a>
         </PageTitle>
       </div>
-      <Articles
-        articles={articles}
-        sponText={team.spon_text}
-        sponLink={team.spon_link}
-      />
+      <Articles articles={articles} sponText={team.spon_text} />
+      sponLink={team.spon_link}
       <PageTitle variant="body1">{team.footer_text}</PageTitle>
     </Container>
   )

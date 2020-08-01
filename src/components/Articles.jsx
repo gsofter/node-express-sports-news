@@ -93,6 +93,7 @@ const LoadMoreButton = withStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: '12px',
     },
+    marginBottom: '50px',
   },
 }))(Button)
 

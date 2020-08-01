@@ -3,6 +3,8 @@ import React from 'react'
 import { makeStyles, Container } from '@material-ui/core'
 import Articles from './Articles'
 import PageTitle from './PageTitle'
+import Scroll from 'react-scroll'
+const scroll = Scroll.animateScroll
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: theme.spacing(5),
@@ -27,14 +29,19 @@ const useStyles = makeStyles((theme) => ({
 }))
 const HomePage = ({ articles, loading, fail, language }) => {
   const classes = useStyles()
+  const onReadMore = () => {
+    scroll.scrollToBottom()
+  }
   if (loading) return <h1> Loading... </h1>
   else if (fail) return <h1> Request Error </h1>
   return (
     <Container className={classes.root}>
-      <PageTitle variant="h1"> FOOTBALL NEWS </PageTitle>
+      <PageTitle variant="h1"> {language.intro_title} </PageTitle>
       <PageTitle variant="body1">
         {language.intro_text}
-        <a href="#"> Read More </a>
+        <a href="#" onClick={onReadMore}>
+          Read More
+        </a>
       </PageTitle>
       <Articles
         articles={articles}

@@ -12,6 +12,7 @@ export default function Language({
   const [columns, setColumns] = useState([
     { title: 'Code', field: 'code' },
     { title: 'Name', field: 'name' },
+    { title: 'Intro Title', field: 'intro_title' },
     { title: 'Meta Title', field: 'meta_title' },
     { title: 'Meta Description', field: 'meta_description' },
     { title: 'Intro Text', field: 'intro_text' },

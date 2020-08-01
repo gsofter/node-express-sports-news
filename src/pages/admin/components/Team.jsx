@@ -8,6 +8,7 @@ import TeamDialog from '../dialogs/TeamDialog'
 export default function Team({ country, teams, handleSubmit, handleRemove }) {
   const [columns, setColumns] = useState([
     { title: 'Team Name', field: 'name' },
+    { title: 'Intro Title', field: 'intro_title' },
     { title: 'Icon', field: 'icon' },
     { title: 'Meta Title', field: 'meta_title' },
     { title: 'Meta Description', field: 'meta_description' },

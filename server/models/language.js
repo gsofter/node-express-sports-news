@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 const LanguageSchema = new Schema({
   code: { type: String, unique: true, require: true },
   name: { type: String, unique: true, require: true },
+  intro_title: String,
   meta_title: String,
   meta_Description: String,
   intro_text: String,

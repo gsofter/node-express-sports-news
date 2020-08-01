@@ -15,6 +15,7 @@ export default function Country({
   const [columns, setColumns] = useState([
     { title: 'Country', field: 'country' },
     { title: 'Language', field: 'language' },
+    { title: 'Intro Title', field: 'intro_title' },
     { title: 'Meta Title', field: 'meta_title' },
     { title: 'Meta Description', field: 'meta_description' },
     { title: 'Intro Text', field: 'intro_text' },

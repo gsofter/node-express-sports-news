@@ -11,6 +11,7 @@ const TeamSchema = new Schema({
   language: {
     type: String,
   },
+  intro_title: String,
   meta_title: String,
   meta_description: String,
   intro_text: String,
@@ -21,6 +22,7 @@ const TeamSchema = new Schema({
     {
       name: { type: String, default: '', maxlength: 400 },
       icon: { type: String },
+      intro_title: { type: String },
       meta_title: { type: String },
       meta_description: { type: String },
       intro_text: { type: String },
