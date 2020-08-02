@@ -13,6 +13,7 @@ import { makeStyles, withStyles } from '@material-ui/core'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import MenuIcon from '@material-ui/icons/Menu'
+import clsx from 'clsx'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
 
   language: {
     borderTop: '1px solid #373960',
+  },
+
+  myLanguage: {
+    color: 'yellow',
   },
 }))
 
@@ -125,15 +130,23 @@ const CountryItem = ({ country, handleClickCountry, handleClickTeam }) => {
   )
 }
 
-const LanguageItem = ({ language, handleClickLanguage }) => {
+const LanguageItem = ({ language, handleClickLanguage, myLanguage }) => {
   const classes = useStyles()
   return (
     <MenuSubItem
       button
-      className={classes.nested}
+      className={
+        myLanguage === language.code ? classes.myLanguage : classes.nested
+      }
       onClick={(e) => handleClickLanguage(language.code)}
     >
-      <ListItemText>{language.name}</ListItemText>
+      <ListItemText
+        className={
+          myLanguage === language.code ? classes.myLanguage : classes.nested
+        }
+      >
+        {language.name}
+      </ListItemText>
     </MenuSubItem>
   )
 }
@@ -143,6 +156,7 @@ const Sidebar = ({
   closeMenu,
   teams,
   languages,
+  myLanguage,
   handleClickCountry,
   handleClickTeam,
   handleClickLanguage,
@@ -184,6 +198,7 @@ const Sidebar = ({
               <LanguageItem
                 handleClickLanguage={handleClickLanguage}
                 language={language}
+                myLanguage={myLanguage}
               />
             ))}
           </div>

@@ -1,12 +1,14 @@
 import React from 'react'
 import SidebarComponent from '../components/Sidebar'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { setMyTeam } from '../redux/actions'
 const Sidebar = ({ isOpen, toggleMenu }) => {
   const teams = useSelector((state) => state.teams)
   const languages = useSelector((state) => state.languages)
   const history = useHistory()
+  const { language } = useParams()
+  const filterTeamsByLang = teams.filter((team) => team.language === language)
   const dispatch = useDispatch()
   const closeMenu = (e) => {
     toggleMenu(false)
@@ -31,8 +33,9 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
     <SidebarComponent
       closeMenu={closeMenu}
       isOpen={isOpen}
-      teams={teams}
+      teams={filterTeamsByLang}
       languages={languages}
+      myLanguage={language}
       handleClickCountry={handleClickCountry}
       handleClickTeam={handleClickTeam}
       handleClickLanguage={handleClickLanguage}

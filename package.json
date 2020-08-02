@@ -22,6 +22,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "clsx": "^1.1.1",
     "cors": "^2.8.5",
     "crossenv": "0.0.2-security",
     "csv-parser": "^2.3.3",
