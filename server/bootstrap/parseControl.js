@@ -33,7 +33,7 @@ async function rssParse() {
   })
   const langfeeds = await LangFeed.find({})
   langfeeds.forEach((feed) => {
-    parse(feed.feed_url, { language: feed.lang_name, feed: feed.feed_name })
+    parse(feed.feed_url, { language: feed.language, feed: feed.feed_name })
   })
 }
 

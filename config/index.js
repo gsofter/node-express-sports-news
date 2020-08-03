@@ -1,1 +1,3 @@
-export const db = process.env.MONGO_URL
+module.exports = {
+  db: process.env.MONGO_URL,
+}
