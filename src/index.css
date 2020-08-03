@@ -9,6 +9,7 @@ body {
 
 body {
   font-family: 'Space Mono';
+  overflow-anchor: none;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
