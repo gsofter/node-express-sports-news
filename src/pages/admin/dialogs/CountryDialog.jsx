@@ -35,6 +35,7 @@ const Country = ({ open, onClose, languages, isEdit, data, handleSubmit }) => {
       language: data.language || '',
       meta_title: data.meta_title || '',
       meta_description: data.meta_description || '',
+      intro_title: data.intro_title || '',
       intro_text: data.intro_text || '',
       footer_text: data.footer_text || '',
       spon_text: data.spon_text || '',
@@ -93,7 +94,7 @@ const Country = ({ open, onClose, languages, isEdit, data, handleSubmit }) => {
                 ))}
               </TextField>
             </Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 label="Meta Title"
                 fullWidth
@@ -103,7 +104,7 @@ const Country = ({ open, onClose, languages, isEdit, data, handleSubmit }) => {
                 name="meta_title"
               />
             </Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 label="Meta Description"
                 fullWidth
@@ -111,6 +112,16 @@ const Country = ({ open, onClose, languages, isEdit, data, handleSubmit }) => {
                 onChange={handleChange}
                 value={form.meta_description}
                 name="meta_description"
+              />
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <TextField
+                label="Intro Title"
+                fullWidth
+                variant="outlined"
+                onChange={handleChange}
+                value={form.intro_title}
+                name="intro_title"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
