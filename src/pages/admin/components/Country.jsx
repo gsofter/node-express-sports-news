@@ -1,17 +1,28 @@
 import React, { useState } from 'react'
 import MaterialTable from 'material-table'
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import { createMuiTheme, MuiThemeProvider, makeStyles } from '@material-ui/core'
 import { tableIcons } from '../icons'
 import CountryDialog from '../dialogs/CountryDialog'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 
+const useStyles = makeStyles((theme) => ({
+  tableWrapper: {
+    '& table tbody tr td': {
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      maxWidth: '30ch',
+    },
+  },
+}))
 export default function Country({
   countries,
   languages,
   handleSubmit,
   handleRemove,
 }) {
+  const classes = useStyles()
   const [columns, setColumns] = useState([
     { title: 'Country', field: 'country' },
     { title: 'Language', field: 'language' },
@@ -34,7 +45,7 @@ export default function Country({
   const [open, setOpen] = useState(false)
   return (
     <MuiThemeProvider theme={theme}>
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%' }} className={classes.tableWrapper}>
         <MaterialTable
           icons={tableIcons}
           title="Country List"

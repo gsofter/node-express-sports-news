@@ -1,7 +1,23 @@
 import React, { useState } from 'react'
 import MaterialTable from 'material-table'
-import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core'
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  withStyles,
+  makeStyles,
+} from '@material-ui/core'
 import { tableIcons } from '../icons'
+
+const useStyles = makeStyles((theme) => ({
+  tableWrapper: {
+    '& table tbody tr td': {
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      maxWidth: '30ch',
+    },
+  },
+}))
 
 export default function Language({
   languages,
@@ -9,6 +25,7 @@ export default function Language({
   updateLanguage,
   removeLanguage,
 }) {
+  const classes = useStyles()
   const [columns, setColumns] = useState([
     { title: 'Code', field: 'code' },
     { title: 'Name', field: 'name' },
@@ -38,7 +55,7 @@ export default function Language({
 
   return (
     <MuiThemeProvider theme={theme}>
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%' }} className={classes.tableWrapper}>
         <MaterialTable
           icons={tableIcons}
           title="Languages"

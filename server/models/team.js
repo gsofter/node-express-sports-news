@@ -30,6 +30,7 @@ const TeamSchema = new Schema({
       ad_text: { type: String },
       spon_text: { type: String },
       spon_link: { type: String },
+      keyword: { type: String },
     },
   ],
 })

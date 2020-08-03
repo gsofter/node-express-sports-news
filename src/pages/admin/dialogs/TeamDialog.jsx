@@ -77,6 +77,7 @@ const TeamDialog = ({ open, onClose, data, handleSubmit }) => {
       footer_text: data.footer_text || '',
       spon_text: data.spon_text || '',
       spon_link: data.spon_link || '',
+      keyword: data.keyword || '',
       icon: data.icon || '',
     })
   }, [data])
@@ -183,7 +184,7 @@ const TeamDialog = ({ open, onClose, data, handleSubmit }) => {
                 name="footer_text"
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 label="Sponsor Text"
                 type="url"
@@ -194,7 +195,7 @@ const TeamDialog = ({ open, onClose, data, handleSubmit }) => {
                 name="spon_text"
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 label="Sponsor URL"
                 fullWidth
@@ -202,6 +203,16 @@ const TeamDialog = ({ open, onClose, data, handleSubmit }) => {
                 onChange={handleChange}
                 value={form.spon_link}
                 name="spon_link"
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <TextField
+                label="Keyword"
+                fullWidth
+                variant="outlined"
+                onChange={handleChange}
+                value={form.keyword}
+                name="keyword"
               />
             </Grid>
           </Grid>

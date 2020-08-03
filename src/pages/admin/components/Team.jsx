@@ -1,21 +1,64 @@
 import React, { useState } from 'react'
 import MaterialTable from 'material-table'
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core'
+import { createMuiTheme, MuiThemeProvider, makeStyles } from '@material-ui/core'
 import { tableIcons } from '../icons'
 import { confirmAlert } from 'react-confirm-alert'
 import TeamDialog from '../dialogs/TeamDialog'
 
+const useStyles = makeStyles((theme) => ({
+  tableWrapper: {
+    '& table tbody tr td': {
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      maxWidth: '30ch',
+    },
+  },
+}))
+
 export default function Team({ country, teams, handleSubmit, handleRemove }) {
+  const classes = useStyles()
   const [columns, setColumns] = useState([
-    { title: 'Team Name', field: 'name' },
-    { title: 'Intro Title', field: 'intro_title' },
-    { title: 'Icon', field: 'icon' },
-    { title: 'Meta Title', field: 'meta_title' },
-    { title: 'Meta Description', field: 'meta_description' },
-    { title: 'Intro Text', field: 'intro_text' },
-    { title: 'Footer Text', field: 'footer_text' },
-    { title: 'Sponsor Text', field: 'spon_text' },
-    { title: 'Sponsor Link', field: 'spon_link' },
+    {
+      title: 'Team Name',
+      field: 'name',
+    },
+    {
+      title: 'Intro Title',
+      field: 'intro_title',
+    },
+    {
+      title: 'Icon',
+      field: 'icon',
+    },
+    {
+      title: 'Meta Title',
+      field: 'meta_title',
+    },
+    {
+      title: 'Meta Description',
+      field: 'meta_description',
+    },
+    {
+      title: 'Intro Text',
+      field: 'intro_text',
+    },
+    {
+      title: 'Footer Text',
+      field: 'footer_text',
+    },
+    {
+      title: 'Sponsor Text',
+      field: 'spon_text',
+    },
+    {
+      title: 'Sponsor Link',
+      field: 'spon_link',
+    },
+    {
+      title: 'Keyword',
+      field: 'keyword',
+    },
   ])
 
   const theme = createMuiTheme({
@@ -28,7 +71,7 @@ export default function Team({ country, teams, handleSubmit, handleRemove }) {
   const [open, setOpen] = useState(false)
   return (
     <MuiThemeProvider theme={theme}>
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%' }} className={classes.tableWrapper}>
         <MaterialTable
           icons={tableIcons}
           title={`${country} Team`}
