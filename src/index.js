@@ -3,26 +3,12 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-import FantalkTheme from './config/theme'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
 import { BrowserRouter as Router } from 'react-router-dom'
-import Reducer from './redux/reducer'
-import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { SnackbarProvider } from 'notistack'
-const store = createStore(Reducer, composeWithDevTools(applyMiddleware(thunk)))
 
-ReactDOM.render(
-  <Provider store={store}>
-    <FantalkTheme>
-      <SnackbarProvider>
-        <Router>
-          <App />
-        </Router>
-      </SnackbarProvider>
-    </FantalkTheme>
-  </Provider>,
+ReactDOM.hydrate(
+  <Router>
+    <App />
+  </Router>,
   document.getElementById('root'),
 )
 

@@ -1,3 +1,1 @@
-module.exports = {
-  db: process.env.MONGO_URL,
-}
+export const db = process.env.MONGO_URL

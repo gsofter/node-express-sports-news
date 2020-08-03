@@ -4,6 +4,7 @@ import { makeStyles, Container } from '@material-ui/core'
 import Articles from './Articles'
 import PageTitle from './PageTitle'
 import Scroll from 'react-scroll'
+import Helmet from 'react-helmet'
 const scroll = Scroll.animateScroll
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,21 +36,34 @@ const HomePage = ({ articles, loading, fail, language }) => {
   if (loading) return <h1> Loading... </h1>
   else if (fail) return <h1> Request Error </h1>
   return (
-    <Container className={classes.root}>
-      <PageTitle variant="h1"> {language.intro_title} </PageTitle>
-      <PageTitle variant="body1">
-        {language.intro_text}
-        <a href="#" onClick={onReadMore}>
-          Read More
-        </a>
-      </PageTitle>
-      <Articles
-        articles={articles}
-        sponText={language.spon_text}
-        sponLink={language.spon_link}
-      />
-      <PageTitle variant="body1">{language.footer_text}</PageTitle>
-    </Container>
+    <>
+      <Helmet>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="title" content={language.meta_title || 'Fantalk'} />} />
+        <meta
+          name="description"
+          content={
+            language.meta_description ||
+            'Fantalk | World Wide Sports News | Breaking Sports News'
+          }
+        />
+      </Helmet>
+      <Container className={classes.root}>
+        <PageTitle variant="h1"> {language.intro_title} </PageTitle>
+        <PageTitle variant="body1">
+          {language.intro_text}
+          <a href="#" onClick={onReadMore}>
+            Read More
+          </a>
+        </PageTitle>
+        <Articles
+          articles={articles}
+          sponText={language.spon_text}
+          sponLink={language.spon_link}
+        />
+        <PageTitle variant="body1">{language.footer_text}</PageTitle>
+      </Container>
+    </>
   )
 }
 
