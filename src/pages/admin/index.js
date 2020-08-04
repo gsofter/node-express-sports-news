@@ -12,8 +12,8 @@ import Language from './containers/Language'
 import Country from './containers/Country'
 import Team from './containers/Team'
 import Banner from './containers/Banner'
-import Login from './containers/Login'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { loginFailed } from '../../redux/actions'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -64,6 +64,7 @@ const PrivateRoute = ({ children, ...rest }) => {
 export default function Dashboard() {
   const classes = useStyles()
   const match = useRouteMatch()
+  const dispatch = useDispatch()
   const [open, setOpen] = React.useState(true)
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -72,10 +73,17 @@ export default function Dashboard() {
     setOpen(false)
   }
 
+  const handleLogout = () => {
+    dispatch(loginFailed())
+  }
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Header handleDrawerOpen={handleDrawerOpen} open={open} />
+      <Header
+        handleDrawerOpen={handleDrawerOpen}
+        open={open}
+        handleLogout={handleLogout}
+      />
       <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

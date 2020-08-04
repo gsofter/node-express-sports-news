@@ -45,7 +45,6 @@ const TeamPage = ({ team, articles, loading, fail }) => {
   const onReadMore = () => {
     scroll.scrollToBottom()
   }
-  console.log('team', team)
   if (loading) return <h1> Loading... </h1>
   else if (fail) return <h1> Request Error </h1>
   return (
@@ -77,7 +76,6 @@ const TeamPage = ({ team, articles, loading, fail }) => {
           </PageTitle>
         </div>
         <Articles articles={articles} sponText={team.spon_text} />
-        sponLink={team.spon_link}
         <PageTitle variant="body1">{team.footer_text}</PageTitle>
       </Container>
     </>

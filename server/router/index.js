@@ -352,4 +352,20 @@ router.post('/login', async (req, res) => {
   res.send(jwtToken)
 })
 
+router.post('/change_password', async (req, res) => {
+  const { email, oldPassword, newPassword } = req.body
+  try {
+    const user = await User.findOne({ email, password: oldPassword })
+    if (!user) {
+      res.status(401).send('Incorrect Credentials')
+    }
+
+    user.password = newPassword
+    await user.save()
+    res.send('sucess')
+  } catch (err) {
+    res.status(500).send('Internal Error')
+  }
+})
+
 module.exports = router
