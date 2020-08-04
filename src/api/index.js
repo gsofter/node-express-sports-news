@@ -13,8 +13,10 @@ export const getCountryArticles = async (countryName) => {
   return await axios.get(`${API_ENDPOINT}/articles/country/${countryName}`)
 }
 
-export const getTeamArticles = async (teamName) => {
-  return await axios.get(`${API_ENDPOINT}/articles/team/${teamName}`)
+export const getTeamArticles = async (teamName, keyword) => {
+  return await axios.get(
+    `${API_ENDPOINT}/articles/team/${teamName}?search=${keyword}`,
+  )
 }
 
 export const getLanguageArticles = async (languageCode) => {

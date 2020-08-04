@@ -66,10 +66,29 @@ router.get('/articles/country/:countryName', async (req, res, next) => {
 
 router.get('/articles/team/:teamName', async (req, res, next) => {
   const { teamName } = req.params
-  const articles = await Article.find({ team: teamName })
-    .sort('-pub_date')
-    .select('title pub_date country language team feed link')
-    .limit(500)
+  const { search } = req.query
+
+  let articles
+  if (search)
+    articles = await Article.find({
+      $or: [
+        { team: teamName },
+        {
+          title: {
+            $regex: search,
+            $options: 'i',
+          },
+        },
+      ],
+    })
+      .sort('-pub_date')
+      .select('title pub_date country language team feed link')
+      .limit(500)
+  else
+    articles = await Article.find({ team: teamName })
+      .sort('-pub_date')
+      .select('title pub_date country language team feed link')
+      .limit(500)
   res.send(articles)
 })
 

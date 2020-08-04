@@ -8,20 +8,19 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { SnackbarProvider } from 'notistack'
 import { Helmet } from 'react-helmet'
-
+import useInit from './hooks/useInit'
 import Header from './containers/Header'
 import Footer from './containers/Footer'
 import Sidebar from './containers/Sidebar'
 import Searchbar from './containers/Searchbar'
 import Homepage from './pages/HomePage'
-import { useDispatch } from 'react-redux'
-import { loadTeams, loadLanguages, loadBanners } from './redux/actions'
 import CountryPage from './pages/CountryPage'
 import TeamPage from './pages/TeamPage'
 import AboutusPage from './components/AboutusPage'
 import SearchPage from './pages/SearchPage'
 import AdminPage from './pages/admin'
 import LoginPage from './pages/LoginPage'
+
 const store = createStore(Reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 const GeneralComponents = () => {
@@ -43,21 +42,16 @@ const GeneralComponents = () => {
 }
 
 const MainApp = () => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(loadTeams())
-    dispatch(loadLanguages())
-    dispatch(loadBanners())
-  }, [dispatch])
+  useInit()
   return (
     <>
       <Helmet>
         <title>Fantalk </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="title" content="Fantalk" />
+        <meta name="title" content="Fantalk" data-react-helmet="true" />
         <meta
           name="description"
-          content="Fantalk | World Wide Sports News | Breaking Sports News"
+          content="Breaking Sports News"
+          data-react-helmet="true"
         />
       </Helmet>
       <FantalkTheme>

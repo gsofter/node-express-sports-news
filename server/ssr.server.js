@@ -68,10 +68,8 @@ function listen() {
       return res.send(
         data
           .replace('<div id="root"> </div>', `<div id="root"> ${app} </div>`)
-          .replace(
-            '<title id="__META_TITLE__"></title>',
-            helmet.meta.toString(),
-          ),
+          .replace('<title>Fantalk</title>', helmet.title.toString())
+          .replace('<meta name="_meta_title" />', helmet.meta.toString()),
       )
     })
   })

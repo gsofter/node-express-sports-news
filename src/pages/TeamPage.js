@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import TeamPageComponent from '../components/TeamPage'
 import * as api from '../api'
+import useInit from '../hooks/useInit'
 const TeamPage = () => {
+  useInit()
   const myTeam = useSelector((state) => state.myTeam)
   const { teamName: teamStr } = useParams()
   const teamName = decodeURI(teamStr)
@@ -13,7 +15,10 @@ const TeamPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.getTeamArticles(teamName)
+        const response = await api.getTeamArticles(
+          teamName,
+          myTeam.keyword || '',
+        )
         setArticles(response.data)
         setLoading(false)
       } catch (e) {
@@ -21,7 +26,7 @@ const TeamPage = () => {
       }
     }
     fetchData()
-  }, [teamName])
+  }, [teamName, myTeam])
 
   return (
     <TeamPageComponent

@@ -38,15 +38,8 @@ const HomePage = ({ articles, loading, fail, language }) => {
   return (
     <>
       <Helmet>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="title" content={language.meta_title || 'Fantalk'} />} />
-        <meta
-          name="description"
-          content={
-            language.meta_description ||
-            'Fantalk | World Wide Sports News | Breaking Sports News'
-          }
-        />
+        <meta name="title" content="asdfasdfasdfasdf" />
+        <meta name="description" content="homelaksdjl kj" />
       </Helmet>
       <Container className={classes.root}>
         <PageTitle variant="h1"> {language.intro_title} </PageTitle>
