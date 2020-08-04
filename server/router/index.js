@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const multer = require('multer')
 const path = require('path')
+const jwt = require('jsonwebtoken')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -30,6 +31,7 @@ require('../models/team')
 require('../models/article')
 require('../models/language')
 require('../models/banner')
+require('../models/user')
 
 const Team = mongoose.model('team')
 const Language = mongoose.model('language')
@@ -37,6 +39,7 @@ const Article = mongoose.model('article')
 const LangFeed = mongoose.model('langfeed')
 const TeamFeed = mongoose.model('teamfeed')
 const Banner = mongoose.model('banner')
+const User = mongoose.model('user')
 
 router.get('/test', async (req, res, next) => {
   res.send('testing')
@@ -330,6 +333,23 @@ router.post('/upload', upload.single('icon'), async (req, res) => {
     console.log('filePath', filePath)
     res.send(filePath)
   }
+})
+
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body
+  const user = await User.findOne({ email, password })
+  if (!user) {
+    res.status(401).send('Incorrect Credentials')
+  }
+
+  const userData = {
+    email: user.email,
+  }
+  const jwtToken = jwt.sign(userData, '123456', {
+    expiresIn: '24h',
+  })
+  // console.log('jwtToken', jwtToken)
+  res.send(jwtToken)
 })
 
 module.exports = router

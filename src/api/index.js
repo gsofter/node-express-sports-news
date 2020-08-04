@@ -120,3 +120,7 @@ export const uploadIcon = async (file) => {
   }
   return await axios.post(`${API_ENDPOINT}/upload`, formData, config)
 }
+
+export const login = async (form) => {
+  return await axios.post(`${API_ENDPOINT}/login`, form)
+}

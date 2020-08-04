@@ -21,7 +21,7 @@ import TeamPage from './pages/TeamPage'
 import AboutusPage from './components/AboutusPage'
 import SearchPage from './pages/SearchPage'
 import AdminPage from './pages/admin'
-
+import LoginPage from './pages/LoginPage'
 const store = createStore(Reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 const GeneralComponents = () => {
@@ -65,6 +65,9 @@ const MainApp = () => {
           <Switch>
             <Route path="/admin">
               <AdminPage />
+            </Route>
+            <Route path="/login">
+              <LoginPage />
             </Route>
             <Route path="/:language/country/:countryName">
               <GeneralComponents />

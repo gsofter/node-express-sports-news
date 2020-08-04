@@ -8,6 +8,7 @@ let initState = {
   banners: [],
   myLanguage: 'en',
   myTeam: {},
+  admin_token: null,
 }
 
 const reducer = handleActions(
@@ -44,6 +45,18 @@ const reducer = handleActions(
       return {
         ...state,
         myTeam: team,
+      }
+    },
+    [actions.LOGIN_SUCCESS]: (state, action) => {
+      return {
+        ...state,
+        admin_token: action.payload,
+      }
+    },
+    [actions.LOGIN_FAILED]: (state, action) => {
+      return {
+        ...state,
+        admin_token: null,
       }
     },
   },

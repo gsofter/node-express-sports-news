@@ -5,12 +5,15 @@ export const INIT_LANGUAGES = 'INIT_LANGUAGES'
 export const INIT_BANNERS = 'INIT_BANNERS'
 export const SET_MY_LANGUAGE = 'SET_MY_LANGUAGE'
 export const SET_MY_TEAM = 'SET_MY_TEAM'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAILED = 'LOGIN_FAILED'
 export const initTeams = createAction(INIT_TEAMS)
 export const initLanguages = createAction(INIT_LANGUAGES)
 export const initBanners = createAction(INIT_BANNERS)
 export const setMyLanguage = createAction(SET_MY_LANGUAGE)
 export const setMyTeam = createAction(SET_MY_TEAM)
-
+export const loginSuccess = createAction(LOGIN_SUCCESS)
+export const loginFailed = createAction(LOGIN_FAILED)
 export const loadTeams = () => async (dispatch) => {
   try {
     const res = await api.getTeams()
@@ -43,5 +46,16 @@ export const loadBanners = () => async (dispatch) => {
   } catch (e) {
     console.log('Error =====>', e.message)
     dispatch(initBanners([]))
+  }
+}
+
+export const loginRequest = (form) => async (dispatch) => {
+  try {
+    const res = await api.login(form)
+    console.log('admin_token', res.data)
+    dispatch(loginSuccess(res.data))
+  } catch (e) {
+    dispatch(loginFailed())
+    throw e
   }
 }

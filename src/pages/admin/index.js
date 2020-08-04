@@ -5,13 +5,15 @@ import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
-import { Switch, Route, useRouteMatch } from 'react-router-dom'
+import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom'
 import TeamFeed from './containers/TeamFeed'
 import LangFeed from './containers/LangFeed'
 import Language from './containers/Language'
 import Country from './containers/Country'
 import Team from './containers/Team'
 import Banner from './containers/Banner'
+import Login from './containers/Login'
+import { useSelector } from 'react-redux'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -38,6 +40,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+const PrivateRoute = ({ children, ...rest }) => {
+  const admin_token = useSelector((state) => state.admin_token)
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        admin_token ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: location },
+            }}
+          />
+        )
+      }
+    />
+  )
+}
+
 export default function Dashboard() {
   const classes = useStyles()
   const match = useRouteMatch()
@@ -59,23 +82,26 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             <Switch>
-              <Route path={`${match.path}/feeds/team`}>
+              <PrivateRoute path={`${match.path}/feeds/team`}>
                 <TeamFeed />
-              </Route>
-              <Route path={`${match.path}/feeds/lang`}>
+              </PrivateRoute>
+              <PrivateRoute path={`${match.path}/feeds/lang`}>
                 <LangFeed />
-              </Route>
-              <Route path={`${match.path}/languages`}>
+              </PrivateRoute>
+              <PrivateRoute path={`${match.path}/languages`}>
                 <Language />
-              </Route>
-              <Route path={`${match.path}/countries`}>
+              </PrivateRoute>
+              <PrivateRoute path={`${match.path}/countries`}>
                 <Country />
-              </Route>
-              <Route path={`${match.path}/teams`}>
+              </PrivateRoute>
+              <PrivateRoute path={`${match.path}/teams`}>
                 <Team />
-              </Route>
-              <Route path={`${match.path}/banner`}>
+              </PrivateRoute>
+              <PrivateRoute path={`${match.path}/banner`}>
                 <Banner />
+              </PrivateRoute>
+              <Route path="*">
+                <Redirect to="/admin/feeds/team" />
               </Route>
             </Switch>
           </Grid>

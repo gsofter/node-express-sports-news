@@ -3,9 +3,11 @@ const { compose: feedUrls } = require('./feedUrls')
 require('../models/language')
 require('../models/team')
 require('../models/banner')
+require('../models/user')
 const Team = mongoose.model('team')
 const Language = mongoose.model('language')
 const Banner = mongoose.model('banner')
+const User = mongoose.model('user')
 
 const teams = [
   {
@@ -114,6 +116,13 @@ const banners = [
   },
 ]
 
+const users = [
+  {
+    email: 'admin@admin.com',
+    password: '123456',
+  },
+]
+
 const feedTeams = async () => {
   for (const item of teams) {
     const newTeam = await Team.findOneAndUpdate(
@@ -161,6 +170,25 @@ const feedBanner = async () => {
   }
 }
 
+const feedUser = async () => {
+  for (const user of users) {
+    const newUser = await User.findOneAndUpdate(
+      {
+        email: user.email,
+      },
+      {
+        password: user.password,
+      },
+      {
+        new: true,
+        upsert: true,
+        useFindAndModify: true,
+      },
+    )
+    console.log('newUser', newUser)
+  }
+}
+
 function connect() {
   mongoose.connection
     .on('error', console.log)
@@ -171,6 +199,7 @@ function connect() {
       feedLanguages()
       feedUrls()
       feedBanner()
+      feedUser()
       //Promise.all([feedTeams, feedLanguages]).then(process.exit)
     })
   return mongoose.connect('mongodb://localhost:27017/fantalk', {
