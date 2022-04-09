@@ -40,7 +40,7 @@
     "ignore-styles": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
     "material-table": "^1.66.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.9.24",
     "multer": "^1.4.2",
     "node-fetch": "^2.6.0",
