@@ -43,7 +43,7 @@
     "moment": "^2.27.0",
     "mongoose": "^5.9.24",
     "multer": "^1.4.2",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "notistack": "^0.9.17",
     "path": "^0.12.7",
     "query-string": "^6.13.1",
