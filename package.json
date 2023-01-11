@@ -38,7 +38,7 @@
     "fs": "0.0.1-security",
     "history": "^5.0.0",
     "ignore-styles": "^5.0.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "material-table": "^1.66.0",
     "moment": "^2.27.0",
     "mongoose": "^5.9.24",
